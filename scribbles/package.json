@@ -1,0 +1,21 @@
+{
+  "name": "scribbles",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "hbs": "^4.2.0",
+    "mongoose": "^8.5.1",
+    "morgan": "^1.10.0",
+    "serve-favicon": "^2.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}
