@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const Scribble = require('../models/Scribble.model')
 
 
-/* GET home page */
 router.get("/scribbles/food-corner", (req, res, next) => {
   res.render("channels/food-corner");
 });

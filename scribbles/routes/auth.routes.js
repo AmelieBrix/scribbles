@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const bcryptjs = require('bcryptjs');
 const User = require('../models/User.model')
-const { isLoggedIn, isLoggedOut } = require('../middleware/route-guard.js');
 const saltRounds = 10;
 
 router.get("/signup", (req, res, next) => {
@@ -69,3 +68,5 @@ router.get("/signup", (req, res, next) => {
       res.redirect('/');
     });
   });
+
+  module.exports = router;
