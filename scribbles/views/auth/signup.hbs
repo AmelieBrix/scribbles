@@ -1,1 +1,31 @@
-<h1>signup page</h1>
+<div id="form">
+  <h2>Sign Up</h2>
+  <form action="/signup" method="POST" enctype="multipart/form-data">
+
+    <label for="firstName">First Name
+      <input type="text" id="firstName" name="first_Name" required/>
+    </label>
+
+    <label for="lastName">Last Name
+      <input type="text" id="lastName" name="last_Name" required/>
+    </label>
+
+    <label for="username">Username
+      <input type="text" id="username" name="username" required/>
+    </label>
+
+    <label for="email">Email
+      <input type="email" id="email" name="email" required/>
+    </label>
+
+    <label for="password">Password
+      <input type="password" id="password" name="password" placeholder="********" required />
+    </label>
+
+    <button type="submit">Sign Up</button>
+    
+    {{#if errorMessage}}
+    <p class="error">{{errorMessage}}</p>
+    {{/if}}
+  </form>
+</div>
