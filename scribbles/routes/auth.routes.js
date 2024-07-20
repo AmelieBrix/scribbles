@@ -21,7 +21,6 @@ router.get("/signup", (req, res, next) => {
         });
       })
       .then(userFromDB => {
-        /* console.log('Newly created user is: ', userFromDB); */
         res.redirect(`/userProfile`);
       })
       .catch(error => next(error));
@@ -36,7 +35,7 @@ router.get("/signup", (req, res, next) => {
     res.render("auth/login")
   });
 
-  router.post('/login',isLoggedOut, (req, res, next) => {
+  router.post('/login', (req, res, next) => {
     console.log('SESSION =====> ', req.session);
     const { email, password } = req.body;
     if (email === '' || password === '') {
