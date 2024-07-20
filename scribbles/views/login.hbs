@@ -1,1 +1,19 @@
-<h1>this is the login</h1>
+<div id="form">
+  <h2>Login</h2>
+  <form action="/login" method="POST">
+
+    <label for="email">Email
+      <input type="email" id="email" name="email" required/>
+    </label>
+
+    <label for="password">Password
+      <input type="password" id="password" name="password" placeholder="****" required />
+    </label>
+
+    <button type="submit">Log in</button>
+    
+    {{#if errorMessage}}
+    <p class="error">{{errorMessage}}</p>
+    {{/if}}
+  </form>
+</div>
