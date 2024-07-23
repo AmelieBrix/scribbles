@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const bcryptjs = require('bcryptjs');
 const User = require('../models/User.model')
+const { isLoggedIn, isLoggedOut } = require('../middleware/route-guard.js');
 const saltRounds = 10;
 
 router.get("/signup", (req, res, next) => {
@@ -30,7 +31,7 @@ router.get("/signup", (req, res, next) => {
 
   router.get('/userProfile', (req, res) => {
     console.log('req.session', req.session)
-    res.render('auth/profile')
+    res.render('auth/profile',{user: req.session.currentUser})
   });
 
   router.get('/login', (req, res, next) => {
