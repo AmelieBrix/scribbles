@@ -4,7 +4,7 @@ const User = require('../models/User.model')
 const { isLoggedIn, isLoggedOut } = require('../middleware/route-guard.js');
 const saltRounds = 10;
 
-router.get("/signup", (req, res, next) => {
+router.get("/signup",isLoggedOut, (req, res, next) => {
     res.render("auth/signup");
   });
 
