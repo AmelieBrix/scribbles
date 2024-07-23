@@ -30,6 +30,12 @@ const scribbleSchema = new Schema(
       data: Buffer,
       contentType: String
     },
+    comments: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Comment' // I hope this connects to the comment model, pray for me
+      }
+    ]
   }
 );
 
