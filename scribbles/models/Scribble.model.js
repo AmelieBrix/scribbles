@@ -23,19 +23,19 @@ const scribbleSchema = new Schema(
       required: false
     },
     time: {
-      type: String,
+      type: date,
       required: false
     },
-    scribble_Picture: {
+    /* scribble_Picture: {
       data: Buffer,
       contentType: String
-    },
+    }, */
     comments: [
       {
         type: Schema.Types.ObjectId,
         ref: 'Comment' // I hope this connects to the comment model, pray for me
-      }
-    ]
+                        //but why do we need this here ?
+  }]
   }
 );
 
