@@ -10,4 +10,6 @@ router.get("/scribbles", (req, res, next) => {
   res.render("scribbles")
 })
 
+
+
 module.exports = router;
