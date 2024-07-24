@@ -23,7 +23,7 @@ const scribbleSchema = new Schema(
       required: false
     },
     time: {
-      type: date,
+      type: Date,
       required: false
     },
     /* scribble_Picture: {
