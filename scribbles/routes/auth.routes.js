@@ -8,7 +8,7 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
     res.render("auth/signup");
   });
 
-  router.post('/signup', (req, res, next) => {
+  router.post('/signup',isLoggedOut, (req, res, next) => {
     const {first_Name, last_Name, username, email, password } = req.body;
    console.log(req.body)
     bcryptjs
@@ -29,16 +29,16 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
       .catch(error => next(error));
   });
 
-  router.get('/userProfile', (req, res) => {
+  router.get('/userProfile',isLoggedIn, (req, res) => {
     console.log('req.session', req.session)
     res.render('auth/profile',{user: req.session.currentUser})
   });
 
-  router.get('/login', (req, res, next) => {
+  router.get('/login',isLoggedOut, (req, res, next) => {
     res.render("auth/login")
   });
 
-  router.post('/login', (req, res, next) => {
+  router.post('/login',isLoggedOut, (req, res, next) => {
     console.log('SESSION =====> ', req.session);
     console.log(req.body)
     const { email, password } = req.body;
@@ -66,10 +66,10 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
       .catch(error => next(error));
   });
 
-  router.post('/logout', (req, res, next) => {
+  router.get('/logout',isLoggedIn, (req, res, next) => {
     req.session.destroy(err => {
       if (err) next(err);
-      res.redirect('/');
+      res.render('auth/login');
     });
   });
 
