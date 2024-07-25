@@ -1,12 +1,12 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model, trusted } = require("mongoose");
+const User = require('./User.model');
 
 const scribbleSchema = new Schema(
   {
     title: {
       type: String,
       trim: true,
-      required: true,
-      unique: false
+      required: true
     },
     category: {
       type: String,
@@ -22,20 +22,27 @@ const scribbleSchema = new Schema(
       type: String,
       required: false
     },
-    time: {
+    time: { 
       type: Date,
-      required: false
+      default: Date.now,
+      required: true         
     },
-    /* scribble_Picture: {
+    scribblePicture: {
       data: Buffer,
       contentType: String
-    }, */
+    },
     comments: [
       {
-        type: Schema.Types.ObjectId,
-        ref: 'Comment' // I hope this connects to the comment model, pray for me
-                        //but why do we need this here ?
-  }]
+      type: Schema.Types.ObjectId,
+      ref: 'Comment' // I hope this connects to the comment model, pray for me
+  }],
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User', // This references the User model
+    }
+  },
+  {
+    timestamps : true
   }
 );
 

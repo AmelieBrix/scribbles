@@ -79,13 +79,13 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
   });
 
   router.get('/scribbles/create', (req, res) => {
-    res.render('celebrities/new-celebrity')
+    res.render('auth/create-post')
   })
 
   router.post('/scribbles/create', async (req, res) => {
     try {
         const newScribble = await Scribble.create(req.body)
-        res.redirect('/scribble')
+        res.redirect('/scribbles')
         console.log("new scribble created", newScribble)
     } catch (error) {
       res.render('scribbles', { errorMessage: 'Error creating scribble. Please try again.' });
