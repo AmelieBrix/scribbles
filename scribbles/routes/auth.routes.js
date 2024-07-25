@@ -21,8 +21,8 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
       .then(salt => bcryptjs.hash(password, salt))
       .then(hashedPassword => {
         return User.create({
-            first_Name,
-            last_Name,
+          first_Name,
+          last_Name,
           username,
           email,
           passwordHash: hashedPassword
@@ -62,7 +62,7 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
           return;
         } else if (bcryptjs.compareSync(password, user.passwordHash)) {
           req.session.currentUser = user;
-          res.render('auth/profile');
+          res.redirect('/userProfile');
         } else {
           console.log("Incorrect password. ");
           res.render('auth/login', { errorMessage: 'User not found and/or incorrect password.' });
@@ -100,6 +100,7 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
   router.post('/userProfile/edit', isLoggedIn, (req, res, next) => {
     const { first_Name, last_Name, username, email, password } = req.body;
     const userId = req.session.currentUser._id;
+    console.log(req.body, "lala")
     if (!first_Name || !last_Name || !username || !email) {
         res.render('auth/edit-profile', { 
             errorMessage: 'All fields are mandatory. Please provide your information.', 
