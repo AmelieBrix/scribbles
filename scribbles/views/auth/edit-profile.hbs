@@ -1,11 +1,20 @@
 <h1>update your profile</h1>
 
-<form action="/movies/{{userEdit.id}}" method="post">
-    <input type="text" name="title" value="{{userEdit.first_Name}}">
-    <input type="text" name="title" value="{{userEdit.last_Name}}">
-    <input type="text" name="title" value="{{userEdit.username}}">
-    <input type="text" name="title" value="{{userEdit.email}}">
-    <input type="text" name="title" value="{{userEdit.email}}">
-    <input type="text" name="title" value="{{userEdit.passwordHash}}">
+<form action="/userProfile/edit" method="post">
+    <label for="first_Name">First Name:</label>
+    <input type="text" name="title" value="{{user.first_Name}}">
+
+    <label for="last_Name">Last Name:</label>
+    <input type="text" name="title" value="{{user.last_Name}}">
+
+    <label for="username">Username:</label>
+    <input type="text" name="title" value="{{user.username}}">
+
+    <label for="email">Email:</label>
+    <input type="text" name="title" value="{{user.email}}">
+
+    <label for="password">New Password (optional):</label>
+    <input type="text" name="title" value="">
+
     <button type="submit">Submit</button>
 </form>
