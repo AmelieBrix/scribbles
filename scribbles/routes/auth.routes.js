@@ -3,6 +3,7 @@ const bcryptjs = require('bcryptjs');
 const User = require('../models/User.model')
 const Scribble = require('../models/Scribble.model')
 const Comment = require('../models/Comment.model')
+const fileUploader = require('../config/cloudinary.config');
 const { isLoggedIn, isLoggedOut } = require('../middleware/route-guard.js');
 const saltRounds = 10;
 
@@ -10,7 +11,7 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
     res.render("auth/signup");
   });
 
-  router.post('/signup',isLoggedOut, (req, res, next) => {
+  router.post('/signup',isLoggedOut,fileUploader.single('profilePicture'), (req, res, next) => {
     const {first_Name, last_Name, username, email, password } = req.body;
    console.log(req.body)
    if (!first_Name || !last_Name || !username || !email || !password) {
@@ -26,7 +27,8 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
           last_Name,
           username,
           email,
-          passwordHash: hashedPassword
+          passwordHash: hashedPassword,
+          profilePicture: req.file.path
         });
       })
       .then(userFromDB => {
@@ -83,7 +85,7 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
     res.render('auth/create-post')
   })
 
-  router.post('/scribbles/create', async (req, res) => {
+  router.post('/scribbles/create',fileUploader.single('ImageUrl'), async (req, res) => {
     try {
         const { title, category, description, location, comments } = req.body
         const userId = req.session.currentUser._id;
@@ -96,7 +98,8 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
             category,
             description,
             location,
-            user: user._id
+            user: user._id,
+            ImageUrl : req.file.path
           });
           await newScribble.save();
         res.redirect('/scribbles')

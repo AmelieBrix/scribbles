@@ -1,5 +1,6 @@
 const { Schema, model, trusted } = require("mongoose");
 const User = require('./User.model');
+const fileUploader = require('../config/cloudinary.config');
 
 const scribbleSchema = new Schema(
   {
@@ -27,9 +28,10 @@ const scribbleSchema = new Schema(
       default: Date.now,
       required: true         
     },
-    scribblePicture: {
-      data: Buffer,
-      contentType: String
+    ImageUrl: {
+      type: String,
+      required: false,
+      default: '../public/images/default_post.png'
     },
     comments: [
       {

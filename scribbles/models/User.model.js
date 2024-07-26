@@ -32,9 +32,10 @@ const userSchema = new Schema(
       type: String,
       required: true
     },
-    profile_Picture: {
-      data: Buffer,
-      contentType: String
+    profilePicture: {
+      type: String,
+      required: false,
+      default: '../public/images/default.jpg'
     }
   },
   { 
