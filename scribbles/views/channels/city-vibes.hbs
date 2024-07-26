@@ -1,10 +1,6 @@
 <h1>city vibes</h1>
 
 {{#each posts}}
-    <p>{{title}}</p>
-    <p>Posted by 
-        {{#each user}}
-            {{this.name}}
-        {{/each}}
-        </p>
+    <p>{{this.title}}</p>
+    <p>Posted by {{this.user.first_Name}}</p>
 {{/each}}

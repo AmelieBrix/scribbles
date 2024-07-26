@@ -7,8 +7,7 @@ const Comment = require('../models/Comment.model')
 router.get("/scribbles/food-corner", async (req, res, next) => {
   try {
     const posts = await Scribble.find({ category: "Food Corner" })
-    .populate('user', 'name')
-    .populate('comments');
+    .populate('user')
     res.render("channels/food-corner", { posts });
   } catch (err) {
     next(err);
@@ -18,8 +17,7 @@ router.get("/scribbles/food-corner", async (req, res, next) => {
 router.get("/scribbles/art-fart", async (req, res, next) => {
   try {
     const posts = await Scribble.find({ category: "Art Fart" })
-    .populate('user', 'name')
-    .populate('comments');
+    .populate('user')
     res.render("channels/art-fart", { posts });
   } catch (err) {
     next(err);
@@ -29,8 +27,7 @@ router.get("/scribbles/art-fart", async (req, res, next) => {
 router.get("/scribbles/city-vibes", async (req, res, next) => {
   try {
     const posts = await Scribble.find({ category: "City Vibes" })
-    .populate('user', 'name')
-    .populate('comments');
+    .populate('user')
     res.render("channels/city-vibes", { posts });
   } catch (err) {
     next(err);
@@ -40,8 +37,7 @@ router.get("/scribbles/city-vibes", async (req, res, next) => {
 router.get("/scribbles/game-hub", async (req, res, next) => {
   try {
     const posts = await Scribble.find({ category: "Game Hub" })
-    .populate('user', 'name')
-    .populate('comments');
+    .populate('user')
     res.render("channels/game-hub", { posts });
   } catch (err) {
     next(err);

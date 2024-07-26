@@ -2,6 +2,7 @@ const router = require("express").Router();
 const bcryptjs = require('bcryptjs');
 const User = require('../models/User.model')
 const Scribble = require('../models/Scribble.model')
+const Comment = require('../models/Comment.model')
 const { isLoggedIn, isLoggedOut } = require('../middleware/route-guard.js');
 const saltRounds = 10;
 
@@ -55,7 +56,7 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
     }
     User.findOne({ email })
       .then(user => {
-        console.log(user)
+        console.log(user,user)
         if (!user) {
           console.log("Email not registered. ");
           res.render('auth/login', { errorMessage: 'User not found and/or incorrect password.' });
@@ -78,13 +79,26 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
     });
   });
 
-  router.get('/scribbles/create', (req, res) => {
+  router.get('/scribbles/create', isLoggedIn, (req, res) => {
     res.render('auth/create-post')
   })
 
   router.post('/scribbles/create', async (req, res) => {
     try {
-        const newScribble = await Scribble.create(req.body)
+        const { title, category, description, location, comments } = req.body
+        const userId = req.session.currentUser._id;
+        const user = await User.findById(userId);
+          if (!user) {
+            return res.status(404).send('User not found');
+          }
+          const newScribble = new Scribble({
+            title,
+            category,
+            description,
+            location,
+            user: user._id
+          });
+          await newScribble.save();
         res.redirect('/scribbles')
         console.log("new scribble created", newScribble)
     } catch (error) {
@@ -92,6 +106,48 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
         console.log(error)
     }
   })
+
+  router.get('/scribbles', isLoggedIn, async (req, res, next) => {
+    try {
+      const posts = await Scribble.find()
+        .populate('user')
+        .populate({
+          path: 'comments',
+          populate: { path: 'user' }
+        });
+      res.render("scribbles", { posts });
+    } catch (err) {
+      next(err);
+    }
+  });
+
+  router.post('/scribbles/:id/comments', isLoggedIn, async (req, res) => {
+    try {
+      const { content } = req.body;
+      const scribbleId = req.params.id;
+      const userId = req.session.currentUser._id;
+  
+      const newComment = new Comment({
+        content,
+        user: userId
+      });
+  
+      await newComment.save();
+  
+      const scribble = await Scribble.findById(scribbleId);
+      if (!scribble) {
+        return res.status(404).send('Scribble not found');
+      }
+  
+      scribble.comments.push(newComment._id);
+      await scribble.save();
+  
+      res.redirect(`/scribbles/${scribbleId}`);
+    } catch (error) {
+      res.render('scribbles', { errorMessage: 'Error adding comment. Please try again.' });
+      console.log(error);
+    }
+  });
 
   router.get('/userProfile/edit', isLoggedIn, (req, res, next) => {
     res.render('auth/edit-profile', { user: req.session.currentUser });

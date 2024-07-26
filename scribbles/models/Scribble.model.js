@@ -39,6 +39,7 @@ const scribbleSchema = new Schema(
     user: {
       type: Schema.Types.ObjectId,
       ref: 'User', // This references the User model
+      required: true
     }
   },
   {

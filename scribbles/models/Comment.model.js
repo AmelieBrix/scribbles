@@ -3,7 +3,9 @@ const { Schema, model, SchemaType } = require("mongoose");
 const commentSchema = new Schema(
   {
     user: {
-      type: Schema.Types.ObjectId
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: true
     },
     createdAt: {
       type: Date,
