@@ -32,7 +32,8 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
         });
       })
       .then(userFromDB => {
-        res.render('auth/profile');   //replaced redirect with render
+       // res.render('auth/profile');
+        res.redirect('/userProfile');   //replaced redirect with render
       })
       .catch(error => next(error));
   });
