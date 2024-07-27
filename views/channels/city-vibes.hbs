@@ -1,20 +1,16 @@
 <h1>city vibes</h1>
 
-{{#each posts}}
-    <p>{{this.title}}</p>
-    <p>Posted by {{this.user.username}}</p>
-{{/each}}
-
-
 <div class="row">
   {{#each posts}}
     <div class="col-md-4 mb-5">
       <div class="card" style="width: 18rem;">
+        <a href="/">
         <img src="{{ImageUrl}}" class="card-img-top" alt="{{title}}">
         <div class="card-body">
-          <h5 class="card-title">{{title}}</h5>
+          <h5 class="card-title">{{title}}</h5> <p>Posted by {{this.user.username}}</p>
           <p class="card-text">{{description}}</p>
         </div>
+        </a>
       </div>
     </div>
   {{else}}

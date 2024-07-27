@@ -1,1 +1,16 @@
 <h1>food corner</h1>
+
+<div class="row">
+  {{#each posts}}
+    <div class="col-md-4 mb-5">
+      <div class="card" style="width: 18rem;">
+        <img src="{{ImageUrl}}" class="card-img-top" alt="{{title}}">
+        <div class="card-body">
+          <h5 class="card-title">{{title}}</h5> <p>Posted by {{this.user.username}}</p>
+          <p class="card-text">{{description}}</p>
+        </div>
+      </div>
+    </div>
+  {{else}}
+    <p>There are no food inspirations yet!</p>
+  {{/each}}
