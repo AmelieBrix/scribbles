@@ -127,6 +127,21 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
     }
   });
 
+  router.get('/scribbles/:id', isLoggedIn, async (req, res, next) => {
+    try {
+      const scribbleId = req.params.id;
+      const scribble = await Scribble.findById(scribbleId)
+      .populate('user')
+      .populate({
+        path: 'comments',
+        populate: { path: 'user' }
+      });
+      res.render("scribbles", { scribble });
+    } catch (err) {
+      next(err);
+    }
+  });
+
   router.post('/scribbles/:id/comments', isLoggedIn, async (req, res) => {
     try {
       const { content } = req.body;

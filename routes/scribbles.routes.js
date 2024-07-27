@@ -8,6 +8,7 @@ router.get("/scribbles/food-corner", async (req, res, next) => {
   try {
     const posts = await Scribble.find({ category: "Food Corner" })
     .populate('user')
+    
     res.render("channels/food-corner", { posts });
   } catch (err) {
     next(err);
