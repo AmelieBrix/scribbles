@@ -22,13 +22,15 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
       .genSalt(saltRounds)
       .then(salt => bcryptjs.hash(password, salt))
       .then(hashedPassword => {
+        const profilePicture = req.file ? req.file.path : '../public/images/default.jpg'; // Set default value if no file is uploaded
+
         return User.create({
           first_Name,
           last_Name,
           username,
           email,
           passwordHash: hashedPassword,
-          profilePicture: req.file.path
+          profilePicture: profilePicture
         });
       })
       .then(userFromDB => {
