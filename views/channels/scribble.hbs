@@ -1,0 +1,22 @@
+<h1>here is your fickigmn scribble</h1>
+
+<div class="row">
+
+    <div class="col-md-4 mb-5">
+      <div class="card" style="width: 18rem;">
+        <img src="{{scribble.ImageUrl}}" class="card-img-top" alt="{{scribble.title}}">
+        <div class="card-body">
+          <h5 class="card-title">{{scribble.title}}</h5> <p>Posted by {{scribble.user.username}}</p>
+          <p class="card-text">{{scribble.description}}</p>
+          {{#each scribble.comments}}
+          <p>{{this.content}} - {{this.user.username}}</p>
+          {{/each}}
+          <form action="/scribbles/{{scribble._id}}/comments" method="POST">
+          <label for="content">
+          <input type="text" name="content">
+          </label>
+          <button type="submit">submit</button>
+          </form>
+        </div>
+      </div>
+    </div>

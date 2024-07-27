@@ -136,7 +136,7 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
         path: 'comments',
         populate: { path: 'user' }
       });
-      res.render("scribbles", { scribble });
+      res.render("channels/scribble", { scribble });
     } catch (err) {
       next(err);
     }
