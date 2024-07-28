@@ -9,7 +9,10 @@
           <h5 class="card-title">{{scribble.title}}</h5> <p>Posted by {{scribble.user.username}}</p>
           <p class="card-text">{{scribble.description}}</p>
           {{#each scribble.comments}}
-          <p>{{this.content}} - {{this.user.username}}</p>
+            <p>{{this.content}} - {{this.user.username}}</p>
+            {{#ifEqual this.user.id ../currentUserId}}
+              <a href="/comments/delete/{{this._id}}" onclick="return confirm('Are you sure you want to delete this comment?');" class="btn btn-danger">Delete</a>
+            {{/ifEqual}}
           {{/each}}
           <form action="/scribbles/{{scribble._id}}/comments" method="POST">
           <label for="content">

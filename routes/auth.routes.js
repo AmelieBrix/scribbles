@@ -138,7 +138,7 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
         populate: { path: 'user' }
       });
       const isOwner = scribble.user._id.toString() === userId.toString();
-      res.render("channels/scribble", { scribble, isOwner: isOwner });
+      res.render("channels/scribble", { scribble, isOwner: isOwner, currentUserId: userId});
     } catch (err) {
       next(err);
     }
@@ -169,6 +169,28 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
     } catch (error) {
       res.render('scribbles', { errorMessage: 'Error adding comment. Please try again.' });
       console.log(error);
+    }
+  });
+
+  router.get('/comments/delete/:id', isLoggedIn, async (req, res, next) => {
+    try {
+      const commentId = req.params.id;
+      const userId = req.session.currentUser._id;
+      
+      const comment = await Comment.findById(commentId).populate('user');
+  
+      if (!comment) {
+        return res.status(404).send('Comment not found');
+      }
+  
+      if (comment.user._id.toString() !== userId.toString()) {
+        return res.status(403).send('Unauthorized to delete this comment');
+      }
+  
+      await Comment.findByIdAndDelete(commentId);
+      res.redirect('/scribbles');
+    } catch (err) {
+      next(err);
     }
   });
 

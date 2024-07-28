@@ -38,4 +38,12 @@ app.use("/", userRoutes);
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 
+// Register Handlebars helpers
+hbs.registerHelper('ifEqual', function(v1, v2, options) {
+    if (v1.toString() === v2.toString()) {
+      return options.fn(this);
+    }
+    return options.inverse(this);
+  });
+
 module.exports = app;
