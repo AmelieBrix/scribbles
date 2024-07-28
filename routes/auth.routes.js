@@ -22,7 +22,7 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
       .genSalt(saltRounds)
       .then(salt => bcryptjs.hash(password, salt))
       .then(hashedPassword => {
-        const profilePicture = req.file ? req.file.path : '../public/images/default.jpg'; // Set default value if no file is uploaded
+        const profilePicture = req.file ? req.file.path : '/images/default.jpg'; // Set default value if no file is uploaded
 
         return User.create({
           first_Name,
@@ -93,6 +93,7 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
         const { title, category, description, location, comments } = req.body
         const userId = req.session.currentUser._id;
         const user = await User.findById(userId);
+        const ImageUrl = req.file ? req.file.path : '/images/default_post.png';
           if (!user) {
             return res.status(404).send('User not found');
           }
@@ -102,10 +103,11 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
             description,
             location,
             user: user._id,
-            ImageUrl : req.file.path
+            ImageUrl : ImageUrl
           });
+          const categoryId = newScribble.category
           await newScribble.save();
-        res.redirect('/scribbles')
+        res.redirect(`/scribbles/${categoryId.replace(/\s+/g, '-').toLowerCase()}`)
         console.log("new scribble created", newScribble)
     } catch (error) {
       res.render('scribbles', { errorMessage: 'Error creating scribble. Please try again.' });
@@ -138,7 +140,7 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
         populate: { path: 'user' }
       });
       const isOwner = scribble.user._id.toString() === userId.toString();
-      res.render("channels/scribble", { scribble, isOwner: isOwner, currentUserId: userId});
+      res.render("channels/scribble", { scribble, isOwner: isOwner, currentUserId: userId, user: req.session.currentUser});
     } catch (err) {
       next(err);
     }
@@ -152,7 +154,8 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
   
       const newComment = new Comment({
         content,
-        user: userId
+        user: userId,
+        scribble: scribbleId
       });
   
       await newComment.save();
@@ -176,8 +179,8 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
     try {
       const commentId = req.params.id;
       const userId = req.session.currentUser._id;
-      
       const comment = await Comment.findById(commentId).populate('user');
+      const scribbleId = comment.scribble
   
       if (!comment) {
         return res.status(404).send('Comment not found');
@@ -188,7 +191,7 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
       }
   
       await Comment.findByIdAndDelete(commentId);
-      res.redirect('/scribbles');
+      res.redirect(`/scribbles/${scribbleId}`);
     } catch (err) {
       next(err);
     }
@@ -199,7 +202,8 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
       const scribbleId = req.params.id;
       const userId = req.session.currentUser._id;
       const scribble = await Scribble.findById(scribbleId);
-  
+      const categoryId = scribble.category
+      console.log("hrere--->>>",scribble)
       if (!scribble) {
         return res.status(404).send('Scribble not found');
       }
@@ -209,7 +213,7 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
       }
   
       await Scribble.findByIdAndDelete(scribbleId);
-      res.redirect('/scribbles');
+      res.redirect(`/scribbles/${categoryId.replace(/\s+/g, '-').toLowerCase()}`); // replaces the link we use to query the database back to what we have in our url
     } catch (err) {
       next(err);
     }

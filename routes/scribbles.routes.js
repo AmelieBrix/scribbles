@@ -4,45 +4,20 @@ const Scribble = require('../models/Scribble.model')
 const User = require('../models/User.model')
 const Comment = require('../models/Comment.model')
 
-router.get("/scribbles/food-corner", async (req, res, next) => {
-  try {
-    const posts = await Scribble.find({ category: "Food Corner" })
-    .populate('user')
-    
-    res.render("channels/food-corner", { posts });
-  } catch (err) {
-    next(err);
-  }
+const categories = ["food-corner", "art-fart", "city-vibes", "game-hub"]; // These need to match the urls
+
+categories.forEach(category => {
+  router.get(`/scribbles/${category}`, async (req, res, next) => {
+    try {
+      const posts = await Scribble.find({ category: category.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ') }) // this is for the router to convert the url names to match with the names in the database
+        .populate('user');
+      
+      res.render(`channels/${category}`, { posts, user: req.session.currentUser });
+    } catch (err) {
+      next(err);
+    }
+  });
 });
 
-router.get("/scribbles/art-fart", async (req, res, next) => {
-  try {
-    const posts = await Scribble.find({ category: "Art Fart" })
-    .populate('user')
-    res.render("channels/art-fart", { posts });
-  } catch (err) {
-    next(err);
-  }
-})
-
-router.get("/scribbles/city-vibes", async (req, res, next) => {
-  try {
-    const posts = await Scribble.find({ category: "City Vibes" })
-    .populate('user')
-    res.render("channels/city-vibes", { posts });
-  } catch (err) {
-    next(err);
-  }
-});
-
-router.get("/scribbles/game-hub", async (req, res, next) => {
-  try {
-    const posts = await Scribble.find({ category: "Game Hub" })
-    .populate('user')
-    res.render("channels/game-hub", { posts });
-  } catch (err) {
-    next(err);
-  }
-})
 
 module.exports = router;

@@ -15,6 +15,11 @@ const commentSchema = new Schema(
       type: String,
       required: true,
     },
+    scribble: {
+      type: Schema.Types.ObjectId,
+      ref: 'Scribble',
+      required: true
+    }
   },
   { timestamps: true } 
 );
