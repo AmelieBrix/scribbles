@@ -45,6 +45,4 @@ router.get("/scribbles/game-hub", async (req, res, next) => {
   }
 })
 
-
-
 module.exports = router;

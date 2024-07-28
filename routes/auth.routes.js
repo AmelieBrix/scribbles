@@ -130,13 +130,15 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
   router.get('/scribbles/:id', isLoggedIn, async (req, res, next) => {
     try {
       const scribbleId = req.params.id;
+      const userId = req.session.currentUser._id;
       const scribble = await Scribble.findById(scribbleId)
       .populate('user')
       .populate({
         path: 'comments',
         populate: { path: 'user' }
       });
-      res.render("channels/scribble", { scribble });
+      const isOwner = scribble.user._id.toString() === userId.toString();
+      res.render("channels/scribble", { scribble, isOwner: isOwner });
     } catch (err) {
       next(err);
     }
@@ -167,6 +169,27 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
     } catch (error) {
       res.render('scribbles', { errorMessage: 'Error adding comment. Please try again.' });
       console.log(error);
+    }
+  });
+
+  router.get('/scribbles/delete/:id', isLoggedIn, async (req, res, next) => {
+    try {
+      const scribbleId = req.params.id;
+      const userId = req.session.currentUser._id;
+      const scribble = await Scribble.findById(scribbleId);
+  
+      if (!scribble) {
+        return res.status(404).send('Scribble not found');
+      }
+  
+      if (scribble.user.toString() !== userId.toString()) {
+        return res.status(403).send('Unauthorized to delete this scribble');
+      }
+  
+      await Scribble.findByIdAndDelete(scribbleId);
+      res.redirect('/scribbles');
+    } catch (err) {
+      next(err);
     }
   });
 
