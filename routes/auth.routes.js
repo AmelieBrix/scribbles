@@ -85,7 +85,7 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
   });
 
   router.get('/scribbles/create', isLoggedIn, (req, res) => {
-    res.render('auth/create-post')
+    res.render('auth/create-post',{user: req.session.currentUser})
   })
 
   router.post('/scribbles/create',fileUploader.single('ImageUrl'), async (req, res) => {
@@ -102,7 +102,7 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
             category,
             description,
             location,
-            user: user._id,
+            user: userId,
             ImageUrl : ImageUrl
           });
           const categoryId = newScribble.category
