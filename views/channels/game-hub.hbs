@@ -7,7 +7,7 @@
         <a href="/scribbles/{{this._id}}">
         <img src="{{ImageUrl}}" class="card-img-top" alt="{{title}}">
         <div class="card-body">
-          <h5 class="card-title">{{title}}</h5> <p>Posted by {{this.user.username}}</p>
+          <h5 class="card-title">{{title}}</h5> <p>Posted by <img src="{{user.profilePicture}}" alt="Profile Picture" class="icon-picture"> {{this.user.username}}</p>
           <p class="card-text">{{description}}</p>
         </div>
         </a>

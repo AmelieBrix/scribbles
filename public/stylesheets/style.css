@@ -1,3 +1,7 @@
+html {
+  font-size: 10px;
+}
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -8,5 +12,27 @@ a {
 }
 
 h1 {
-  color: 15px;
+  color: 3.5rem;
+}
+
+.profile-picture {
+  width: 150px; /* Fixed width */
+  height: 150px; /* Fixed height */
+  border-radius: 50%; /* Make the image circular */
+  object-fit: cover; /* Ensure the image covers the entire area without distortion */
+  border: 2px solid #ddd; /* Add a subtle border */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  margin: 0 auto; /* Center the image */
+  display: block; /* Ensure the image is treated as a block element */
+}
+
+.icon-picture {
+  width: 40px; /* Fixed width */
+  height: 40px; /* Fixed height */
+  border-radius: 30%; /* Make the image circular */
+  object-fit: cover; /* Ensure the image covers the entire area without distortion */
+  border: 2px solid #ddd; /* Add a subtle border */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  margin: 0 auto; /* Center the image */
+  display: block; /* Ensure the image is treated as a block element */
 }
