@@ -45,6 +45,24 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
     res.render('auth/profile',{user: req.session.currentUser})
   });
 
+  router.get('/user/:userId/myscribbles', async (req, res) => {
+    try {
+      const userId = req.params.userId;
+      const user = await User.findById(userId);
+
+      if (!user) {
+        return res.status(404).send('User not found');
+      }
+  
+      const scribbles = await Scribble.find({ user: userId });
+  
+      res.render('myscribbles', { scribbles, user: req.session.currentUser });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal server error');
+    }
+  });
+
   router.get('/login',isLoggedOut, (req, res, next) => {
     res.render("auth/login")
   });
