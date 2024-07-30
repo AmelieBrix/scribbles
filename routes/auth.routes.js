@@ -49,19 +49,24 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
     try {
       const userId = req.params.userId;
       const user = await User.findById(userId);
-
+  
       if (!user) {
         return res.status(404).send('User not found');
       }
   
-      const scribbles = await Scribble.find({ user: userId });
-  
-      res.render('myscribbles', { scribbles, user: req.session.currentUser });
+      const scribbles = await Scribble.find({ user: userId }).populate('user').populate('comments.user').exec();
+      
+      res.render('myscribbles', { 
+        scribbles, // Pass the array of scribbles
+        currentUserId: req.session.currentUser._id, // Pass the current logged-in user's ID
+        user: req.session.currentUser // Pass the current logged-in user
+      });
     } catch (error) {
       console.error(error);
       res.status(500).send('Internal server error');
     }
   });
+  
 
   router.get('/login',isLoggedOut, (req, res, next) => {
     res.render("auth/login")
@@ -241,11 +246,10 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
     res.render('auth/edit-profile', { user: req.session.currentUser });
   });
 
-  router.post('/userProfile/edit', isLoggedIn, (req, res, next) => {
-    const { first_Name, last_Name, username, email, password } = req.body;
+  router.post('/userProfile/edit', isLoggedIn, fileUploader.single('profilePicture'), (req, res, next) => {
+    const { first_Name, last_Name, username, email, password} = req.body;
     const userId = req.session.currentUser._id;
-    console.log(req.body, "lala")
-    if (!first_Name || !last_Name || !username || !email) {
+    if (!first_Name || !last_Name || !username || !email ) {
         res.render('auth/edit-profile', { 
             errorMessage: 'All fields are mandatory. Please provide your information.', 
             user: req.session.currentUser 
@@ -253,6 +257,8 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
         return;
     }
     const updateUser = { first_Name, last_Name, username, email };
+    const profilePicture = req.file ? req.file.path : '/images/default.jpg'; // Set default value if no file is uploaded
+    updateUser.profilePicture = profilePicture;
 
     if (password) {
       bcryptjs
@@ -281,3 +287,5 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
 
 
   module.exports = router;
+
+

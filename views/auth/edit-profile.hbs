@@ -1,6 +1,6 @@
 <h1>update your profile</h1>
 
-<form action="/userProfile/edit" method="post">
+<form action="/userProfile/edit" method="post" enctype="multipart/form-data">
     <label for="first_Name">First Name:</label>
     <input type="text" name="first_Name" value="{{user.first_Name}}">
 
@@ -15,6 +15,10 @@
 
     <label for="password">New Password (optional):</label>
     <input type="text" name="password">
+
+    <label for="profilePicture"> Profile Picture: </label>
+    <p><img src="{{user.profilePicture}}" alt="Profile Picture" class="profile-picture"></p>
+    <input type="file" name="profilePicture"/>
 
     <button type="submit">Submit</button>
 </form>
