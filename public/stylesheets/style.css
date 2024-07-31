@@ -2,9 +2,10 @@ html {
   font-size: 10px;
 }
 
+
+/* to do: delete all comments*/
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 1.4rem "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
@@ -16,8 +17,8 @@ h1 {
 }
 
 .profile-picture {
-  width: 150px; /* Fixed width */
-  height: 150px; /* Fixed height */
+  width: 15rem; /* Fixed width */
+  height: 15rem; /* Fixed height */
   border-radius: 50%; /* Make the image circular */
   object-fit: cover; /* Ensure the image covers the entire area without distortion */
   border: 2px solid #ddd; /* Add a subtle border */
@@ -27,12 +28,221 @@ h1 {
 }
 
 .icon-picture {
-  width: 40px; /* Fixed width */
-  height: 40px; /* Fixed height */
+  width: 4rem; /* Fixed width */
+  height: 4rem; /* Fixed height */
   border-radius: 30%; /* Make the image circular */
   object-fit: cover; /* Ensure the image covers the entire area without distortion */
   border: 2px solid #ddd; /* Add a subtle border */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
   margin: 0 auto; /* Center the image */
   display: block; /* Ensure the image is treated as a block element */
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: white;
+  padding: 1rem 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 120rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.navbar-brand {
+  position: absolute;
+  left: 3rem;
+}
+
+.navbar-icon {
+  height: 20rem; 
+  vertical-align:top;
+  padding-bottom: 3.5rem;
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-grow: 1;
+  list-style: none;
+  padding: 0;
+  margin: 2rem;
+}
+
+.nav-item {
+  flex: 1;
+  text-align: center;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: black;
+  font-size: 1.8rem;
+  font-weight: bold;
+  padding: 0.5rem 1rem; /* Adjusted padding */
+  display: inline-block;
+  line-height: 4rem; /* Remove line height to align items properly */
+  white-space: nowrap;
+}
+
+.nav-link:hover {
+  background-color: #00a984;
+  border-radius: 6px;
+  padding: 0 3.5rem 0 3.5rem; /* Ensure consistent padding */
+  margin: 0.25rem; /* Add margin to create a small box around text */
+}
+
+.footer {
+  background-color: white;
+  padding: 1rem 0;
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: auto; /* Push the footer to the bottom */
+  width: 100%;
+}
+
+.footer-text {
+  text-align: center;
+  color: black;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.hero {
+  width: 100%;
+  height: 70vh; /* Cover half the screen */
+  overflow: hidden;
+  position: relative;
+}
+
+.hero-text {
+  position: absolute;
+  top: 50%;
+  right: 5%; /* Adjust this value to control horizontal position */
+  transform: translateY(-50%);
+  color: black;
+  text-align: right;
+  width: 30%; /* Take up 30% of the image horizontally */
+}
+
+.hero-text h1 {
+  margin: 0;
+  font-size: 3.5rem; 
+}
+
+.hero-text h2 {
+  margin: 0;
+  font-size: 3rem; 
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+}
+
+.cards-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 18vh; 
+}
+
+.card {
+  background-color: #00a984;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  width: 20%;
+  text-align: center;
+  text-decoration: none; 
+  color: inherit; 
+  transition: background-color 0.3s, transform 0.3s;
+  font-weight: bold;
+}
+
+.card:hover {
+  background-color: beige; 
+  transform: translateY(-5px); 
+}
+
+.card h3 {
+  margin: 0;
+  font-size: 1.6rem;
+  transition: font-weight 0.3s; 
+}
+
+.card:hover h3 {
+  font-weight: bold;
+}
+
+.scribble-cards-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start; 
+  width: 100%;
+  height: 80%;
+  padding: 2rem 0; 
+}
+
+.scribble-card {
+  background-color: #00a984;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  width: 20%;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none; 
+  color: inherit; 
+  transition: background-color 0.3s, transform 0.3s, height 0.3s;
+  height: 10rem; /* this is the initial height */
+}
+
+.scribble-card:hover {
+  background-color: #f0f0f0; 
+  transform: translateY(-5px); 
+  height: 40rem; /* and this  is the  height after you hover */
+}
+
+.scribble-card h3 {
+  margin: 0;
+  font-size: 1.6rem;
+  transition: font-weight 0.3s; 
+}
+
+.scribble-card:hover h3 {
+  font-weight: bold; 
+}
+
+.scribble-card-content {
+  display: none; 
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.scribble-card:hover .scribble-card-content {
+  display: block; 
+  opacity: 1;
+  margin-top: 1rem; 
+}
+
+.scribble-card-content img {
+  width: 100%;
+  height: 20rem; /
+  object-fit: cover; 
+  margin-bottom: 1rem;
 }
