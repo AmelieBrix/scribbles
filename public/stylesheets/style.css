@@ -2,8 +2,6 @@ html {
   font-size: 10px;
 }
 
-
-/* to do: delete all comments*/
 body {
   font: 1.4rem "Lucida Grande", Helvetica, Arial, sans-serif;
 }
@@ -17,25 +15,25 @@ h1 {
 }
 
 .profile-picture {
-  width: 15rem; /* Fixed width */
-  height: 15rem; /* Fixed height */
-  border-radius: 50%; /* Make the image circular */
-  object-fit: cover; /* Ensure the image covers the entire area without distortion */
-  border: 2px solid #ddd; /* Add a subtle border */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-  margin: 0 auto; /* Center the image */
-  display: block; /* Ensure the image is treated as a block element */
+  width: 15rem;
+  height: 15rem; 
+  border-radius: 50%; 
+  object-fit: cover; 
+  border: 2px solid #ddd; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  margin: 0 auto; 
+  display: block; 
 }
 
 .icon-picture {
-  width: 4rem; /* Fixed width */
-  height: 4rem; /* Fixed height */
-  border-radius: 30%; /* Make the image circular */
-  object-fit: cover; /* Ensure the image covers the entire area without distortion */
-  border: 2px solid #ddd; /* Add a subtle border */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-  margin: 0 auto; /* Center the image */
-  display: block; /* Ensure the image is treated as a block element */
+  width: 4rem; 
+  height: 4rem;
+  border-radius: 30%; 
+  object-fit: cover; 
+  border: 2px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  margin: 0 auto; 
+  display: block; 
 }
 
 .navbar {
@@ -89,24 +87,24 @@ h1 {
   color: black;
   font-size: 1.8rem;
   font-weight: bold;
-  padding: 0.5rem 1rem; /* Adjusted padding */
+  padding: 0.5rem 1rem; 
   display: inline-block;
-  line-height: 4rem; /* Remove line height to align items properly */
+  line-height: 4rem; 
   white-space: nowrap;
 }
 
 .nav-link:hover {
   background-color: #00a984;
   border-radius: 6px;
-  padding: 0 3.5rem 0 3.5rem; /* Ensure consistent padding */
-  margin: 0.25rem; /* Add margin to create a small box around text */
+  padding: 0 3.5rem 0 3.5rem; 
+  margin: 0.25rem; 
 }
 
 .footer {
   background-color: white;
   padding: 1rem 0;
   box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
-  margin-top: auto; /* Push the footer to the bottom */
+  margin-top: auto; 
   width: 100%;
 }
 
@@ -119,7 +117,7 @@ h1 {
 
 .hero {
   width: 100%;
-  height: 70vh; /* Cover half the screen */
+  height: 70vh; 
   overflow: hidden;
   position: relative;
 }
@@ -127,11 +125,11 @@ h1 {
 .hero-text {
   position: absolute;
   top: 50%;
-  right: 5%; /* Adjust this value to control horizontal position */
+  right: 5%; 
   transform: translateY(-50%);
   color: black;
   text-align: right;
-  width: 30%; /* Take up 30% of the image horizontally */
+  width: 30%; 
 }
 
 .hero-text h1 {
@@ -242,7 +240,146 @@ h1 {
 
 .scribble-card-content img {
   width: 100%;
-  height: 20rem; /
+  height: 20rem; 
   object-fit: cover; 
   margin-bottom: 1rem;
+}
+
+#profile-h1{
+  background-color: beige;
+  padding-top: 2rem;
+ text-align: center;
+}
+
+.profile-container {
+  background-color: beige;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem; 
+  text-align: center;
+}
+
+.profile-cards {
+  display: flex;
+  gap: 6rem; 
+}
+
+.profile-card {
+  background-color: #00a984;
+  border: 1px solid #ddd;
+  border-radius: 1rem;
+  padding: 4rem; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 30rem; 
+}
+
+.profile-picture {
+  width: 15rem; 
+  height: 15rem; 
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 2rem; 
+}
+
+.profile-card p {
+  margin: 2rem 0;
+  font-size: 2rem; 
+}
+
+.profile-actions {
+  margin-top: 2rem; 
+}
+
+.btn {
+  display: inline-block;
+  margin: 1rem 0; 
+  padding: 1rem 2rem;
+  background-color: #fff;
+  color: #00a984;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 1.8rem; 
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.btn:hover {
+  background-color: #008d6d;
+  color: white;
+}
+
+.edit-profile-container {
+  background-color: beige;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem;
+  text-align: center;
+}
+
+.edit-profile-card {
+  background-color: #00a984;
+  border: 1px solid #ddd;
+  border-radius: 1rem;
+  padding: 4rem; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 40rem; 
+  text-align: center;
+}
+.form-container {
+  background-color: beige;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem; 
+  text-align: center;
+}
+
+.form-card {
+  background-color: #00a984;
+  border: 1px solid #ddd;
+  border-radius: 1rem;
+  padding: 4rem; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: white;
+  width: 40rem; 
+}
+
+.form-card h2 {
+  margin-bottom: 2rem;
+  font-size: 3rem; 
+}
+
+.form-card label {
+  display: block;
+  margin-bottom: 1rem; 
+  font-size: 1.8rem; 
+  text-align: left;
+}
+
+.form-card input[type="text"],
+.form-card input[type="email"],
+.form-card input[type="password"],
+.form-card input[type="file"] {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 2rem; /* Increase margin */
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 1.6rem; /* Increase font size */
 }

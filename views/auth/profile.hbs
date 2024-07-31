@@ -1,15 +1,14 @@
-<h1>welcome to your profile {{user.first_Name}} {{user.last_Name}}</h1>
-<div>
-    <p>{{user.first_Name}}</p>
-    <p>{{user.username}}</p>
-    <p><img src="{{user.profilePicture}}" alt="Profile Picture" class="profile-picture"></p>
-</div>
-
-<div>
-<a href="/userProfile/edit">edit profile</a>
-<a href="/scribbles/create">create scribble</a>
-<a href="/user/{{user._id}}/myscribbles">My Scribbles</a>
-</div>
-
-
-<h1>small test</h1>
+<h1 id="profile-h1">Welcome to your profile, {{user.first_Name}} {{user.last_Name}}</h1>
+  <div class="profile-container">
+    <div class="profile-cards">
+      <div class="profile-card">
+        <img src="{{user.profilePicture}}" alt="Profile Picture" class="profile-picture">
+        <p><strong>{{user.username}}</strong></p>
+        <a href="/userProfile/edit" class="btn">Edit Profile</a>
+      </div>
+      <div class="profile-card">
+        <a href="/scribbles/create" class="btn">Create Scribble</a>
+        <a href="/user/{{user._id}}/myscribbles" class="btn">My Scribbles</a>
+      </div>
+    </div>
+  </div>
