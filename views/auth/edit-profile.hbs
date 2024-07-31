@@ -1,40 +1,14 @@
-<!-- <h1>update your profile</h1>
-
-<form action="/userProfile/edit" method="post" enctype="multipart/form-data">
-    <label for="first_Name">First Name:</label>
-    <input type="text" name="first_Name" value="{{user.first_Name}}">
-
-    <label for="last_Name">Last Name:</label>
-    <input type="text" name="last_Name" value="{{user.last_Name}}">
-
-    <label for="username">Username:</label>
-    <input type="text" name="username" value="{{user.username}}">
-
-    <label for="email">Email:</label>
-    <input type="text" name="email" value="{{user.email}}">
-
-    <label for="password">New Password (optional):</label>
-    <input type="text" name="password">
-
-    <label for="profilePicture"> Profile Picture: </label>
-    <p><img src="{{user.profilePicture}}" alt="Profile Picture" class="profile-picture"></p>
-    <input type="file" name="profilePicture"/>
-
-    <button type="submit">Submit</button>
-</form>
--->
-
   <div class="edit-profile-container">
     <h1>Update your profile</h1>
-    <div class="edit-profile-card">
+    <div class="form-card">
 
-        <label for="profilePicture">Profile Picture:</label>
+        <label for="profilePicture"></label>
         <div class="profile-picture-container">
           <img src="{{user.profilePicture}}" alt="Profile Picture" class="profile-picture">
         </div>
-        <input type="file" name="profilePicture">
+        <form action="/userProfile/edit" method="post" enctype="multipart/form-data">
+        <input type="file" name="profilePicture" >
 <br>
-      <form action="/userProfile/edit" method="post" enctype="multipart/form-data">
         <label for="first_Name">First Name:</label>
         <input type="text" name="first_Name" value="{{user.first_Name}}">
 <br>

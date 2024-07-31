@@ -1,4 +1,6 @@
-<h1>create a post</h1>
+<h1 id="profile-h1">Create a Scribble</h1>
+<div class="form-container">
+  <div class="form-card">
 <form action="/scribbles/create" method="post" enctype="multipart/form-data">
 
     <label for="title">Title:
@@ -14,17 +16,19 @@
     </select>
     </label>
 
-    <label for="description">description:
-    <input type="textarea" name="description">
+    <label for="description">Description:
+    <input type="text" name="description">
     </label>
 
     <label for="location">Location:
     <input type="text" name="location">
     </label>
 
-    <label for="ImageUrl">Profile Picture:
+    <label for="ImageUrl">Add a picture:
       <input type="file" name="ImageUrl" />
     </label>
 
-    <button type="submit">Submit</button>
+    <button type="submit" class="btn">Submit</button>
 </form>
+</div>
+</div>

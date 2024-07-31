@@ -1,18 +1,29 @@
 <h1>game hub</h1>
 
-<div class="row">
-  {{#each posts}}
-    <div class="col-md-4 mb-5">
-      <div class="card" style="width: 18rem;">
-        <a href="/scribbles/{{this._id}}">
-        <img src="{{ImageUrl}}" class="card-img-top" alt="{{title}}">
-        <div class="card-body">
-          <h5 class="card-title">{{title}}</h5> <p>Posted by <img src="{{user.profilePicture}}" alt="Profile Picture" class="icon-picture"> {{this.user.username}}</p>
-          <p class="card-text">{{description}}</p>
+    <div class="container-scribble">
+        {{#each posts}}
+        <div class="scribble-linker">
+            <a href="/scribbles/{{this._id}}" class="scribble-linker">
+                <div class="card-container">
+                    <div class="card-image">
+                        <img src="{{ImageUrl}}" class="card-img" alt="{{title}}">
+                    </div>
+                    <div class="card-content">
+                        <p class="card-title">{{title}}</p>
+                        <p class="card-description">{{description}}</p>
+                        <div class="user-content">
+                          <div>
+                            <img src="{{user.profilePicture}}" class="icon-picture" alt="{{this.user.username}}'s Profile Picture">
+                          </div>
+                          <div>
+                            <p class="username">{{this.user.username}}</p>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
         </div>
-        </a>
-      </div>
+        {{else}}
+    <p>There are no movies yet!</p>
+    {{/each}}
     </div>
-  {{else}}
-    <p>There are no games yet!</p>
-  {{/each}}

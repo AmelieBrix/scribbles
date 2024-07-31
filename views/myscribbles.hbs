@@ -1,6 +1,6 @@
 <h1>My Scribbles</h1>
 
-<div class="row">
+{{!-- <div class="row">
     <a href="">
     {{#each scribbles}}
     <div class="col-md-4 mb-5">
@@ -16,4 +16,25 @@
       </div>
     </div>
     {{/each}}
-</div>
+</div> --}}
+
+    <div class="container-scribble">
+        {{#each scribbles}}
+        <div class="scribble-linker">
+            <a href="/scribbles/{{this._id}}" class="scribble-linker">
+                <div class="card-container">
+                    <div class="card-image">
+                        <img src="{{this.ImageUrl}}" class="card-img" alt="{{this.title}}">
+                    </div>
+                    <div class="card-content">
+                        <p class="card-title">{{this.ttitle}}</p>
+                        <p class="card-description">{{this.description}}</p>
+                    </div>
+                </div>
+            </a>
+            <a href="/scribbles/edit/{{this._id}}" onclick="return confirm('Are you sure you want to edit this scribble?');" class="btn btn-danger">Edit Scribble</a>
+        </div>
+        {{else}}
+    <p>There are no movies yet!</p>
+    {{/each}}
+    </div>
