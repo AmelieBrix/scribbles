@@ -17,7 +17,7 @@
     <div class="comment">
       <div class="comment-header">
         <img src="{{this.user.profilePicture}}" alt="Profile Picture" class="icon-picture">
-        <p class="comment-owner">{{this.user.username}}</p>
+        <p class="comment-owner">{{this.user.username}} <span class="comment-date">{{this.createdAt}}</span></p>
       </div>
       <p class="comment-content">{{this.content}}</p>
       {{#ifEqual this.user.id ../currentUserId}}
@@ -41,4 +41,22 @@
   </div>
 </div>
 
-
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const dateElements = document.querySelectorAll('.comment-date');
+      dateElements.forEach(function(dateElement) {
+        const date = new Date(dateElement.textContent);
+        const options = { 
+          weekday: 'short', 
+          year: 'numeric', 
+          month: 'short', 
+          day: 'numeric', 
+          hour: '2-digit', 
+          minute: '2-digit', 
+          hour12: false 
+        };
+        const formattedDate = date.toLocaleDateString('de-DE', options).replace(',', '');
+        dateElement.textContent = formattedDate;
+      });
+    });
+  </script>

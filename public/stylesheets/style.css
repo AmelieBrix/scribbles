@@ -219,6 +219,7 @@ h1 {
 .scribble-card-link{
   text-decoration: none;
   color: black;
+  margin:2rem;
 }
 
 .scribble-card h3 {
@@ -237,10 +238,15 @@ h1 {
   transition: opacity 0.3s;
 }
 
+.scribble-card-content p {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
 .scribble-card:hover .scribble-card-content {
   display: block; 
   opacity: 1;
-  margin-top: 1rem; 
+  margin-top: 3rem; 
 }
 
 .scribble-card-content img {
@@ -669,7 +675,7 @@ h1 {
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 800px;
+  max-width: 65rem;
   background-color: #00a984; 
   border-radius: 6px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -690,9 +696,11 @@ h1 {
  }
 
 .post-image img {
-  width: 100%;
+  width: calc(100% + 6rem);
   height: auto;
   border-radius: 0.6rem;
+  margin-left: -3rem; /* Negate the left padding */
+  margin-right: -3rem; /* Negate the right padding */
 }
 
 .post-header {
