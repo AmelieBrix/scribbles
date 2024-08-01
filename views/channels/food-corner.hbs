@@ -1,30 +1,34 @@
-<h1>food corner</h1>
+<div class="hero-category">
+  <img src="/images/food.jpg" alt="Food Corner Image" class="hero-category-image">
+  <div class="hero-category-text">
+    <h1>Food Corner</h1>
+  </div>
+</div>
 
-    <div class="container-scribble">
-        {{#each posts}}
-        <div class="scribble-linker">
-            <a href="/scribbles/{{this._id}}" class="scribble-linker">
-                <div class="card-container">
-                    <div class="card-image">
-                        <img src="{{ImageUrl}}" class="card-img" alt="{{title}}">
-                    </div>
-                    <div class="card-content">
-                        <p class="card-title">{{title}}</p>
-                        <p class="card-description">{{description}}</p>
-                        <div class="user-content">
-                          <div>
-                            <img src="{{user.profilePicture}}" class="icon-picture" alt="{{this.user.username}}'s Profile Picture">
-                          </div>
-                          <div>
-                            <p class="username">{{this.user.username}}</p>
-                          </div>
-                        </div>
-                        <p>Likes: <span class="likes-count">{{this.likes.length}}</span></p>
-                    </div>
-                </div>
-            </a>
+<div class="scribbles-category-container">
+  {{#each posts}}
+  <div class="scribbles-category-linker">
+    <a href="/scribbles/{{this._id}}" class="scribbles-category-linker">
+      <div class="scribbles-category-card">
+        <div class="scribbles-category-card-image">
+          <img src="{{ImageUrl}}" class="scribbles-category-card-img" alt="{{title}}">
         </div>
-        {{else}}
-    <p>There are no movies yet!</p>
-    {{/each}}
-    </div>
+        <div class="scribbles-category-card-content">
+          <div class="scribbles-category-title-container">
+            <img src="{{user.profilePicture}}" class="scribbles-category-icon-picture" alt="{{this.user.username}}'s Profile Picture">
+            <p class="scribbles-category-username">{{this.user.username}}</p>
+          </div>
+          <p class="scribbles-category-card-title">{{title}}</p>
+          <p class="scribbles-category-card-description">{{description}}</p>
+           <div class="scribbles-category-likes-container">
+            <i class="fa fa-heart heart"></i>
+            <span class="scribbles-category-likes-count">{{this.likes.length}}</span>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+  {{else}}
+  <p>There are no posts yet!</p>
+  {{/each}}
+</div>
