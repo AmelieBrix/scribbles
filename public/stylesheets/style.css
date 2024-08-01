@@ -392,14 +392,8 @@ h1 {
   font-size: 1.6rem; /* Increase font size */
 }
 
-
-
-
-
-
 .container-scribble{
   display: grid;
-  /* grid-template-rows: 20rem; */
   grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
   place-items: center;
@@ -472,28 +466,156 @@ h1 {
 
 .heart-button {
   display: inline-block;
-  font-size: 24px; /* Size of the heart */
-  color: gray; /* Default color for unliked state */
-  background: none; /* Remove background */
-  border: none; /* Remove border */
-  cursor: pointer; /* Show pointer cursor on hover */
-  text-align: center; /* Center content */
-  transition: color 0.3s, transform 0.3s; /* Smooth transitions */
+  font-size: 24px; 
+  color: gray; 
+  background: none; 
+  border: none; 
+  cursor: pointer; 
+  text-align: center;
+  transition: color 0.3s, transform 0.3s; 
 }
 
-/* Style for the heart icon inside the button */
+
 .heart-button .fa-heart {
-  color: inherit; /* Use the color from .heart-button */
+  color: inherit; 
 }
 
-/* Style when the button is hovered */
+
 .heart-button:hover {
-  color: red; /* Color when hovered */
-  transform: scale(1.1); /* Slightly enlarge the heart on hover */
+  color: red;
+  transform: scale(1.1); 
 }
 
-/* Style for the liked state */
+
 .heart-button.liked {
-  color: red; /* Color for liked state */
+  color: red; 
 }
 
+
+.scribbles-category-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-start;
+  width: 100%;
+  padding-top: 20px;
+  background-color: #00a984;
+}
+
+.scribbles-category-card {
+  border: 1px solid #ddd;
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 300px;
+  margin: 10px;
+  overflow: hidden;
+  text-decoration: none;
+  color: black;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.scribbles-category-title-container {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+
+.scribbles-category-card-image img {
+  width: 100%;
+  height: auto;
+}
+
+.scribbles-category-card-content {
+  padding: 1rem;
+  text-decoration: none;
+}
+
+.scribbles-category-card-title {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.scribbles-category-card-description {
+  margin: 10px 0;
+  font-size: 1rem;
+  color: #333;
+  text-decoration: none;
+}
+
+.scribbles-category-user-content {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  text-decoration: none;
+}
+
+.scribbles-category-icon-picture {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  margin-right: 10px;
+  box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1); 
+}
+
+.scribbles-category-username {
+  margin: 0;
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+.scribbles-category-likes-count {
+  font-weight: bold;
+}
+
+.scribbles-category-card:hover {
+  background-color: beige;
+  transform: translateY(-5px);
+}
+
+.scribbles-category-card:hover .scribbles-category-card-title {
+  font-weight: bold;
+}
+
+
+.hero-category {
+  width: 100%;
+  height: 50vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.hero-category-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-category-text {
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  transform: translateY(-50%);
+  color: black;
+  text-align: right;
+  width: 30%;
+  z-index: 10; /* Ensure the text is above the image */
+}
+
+.hero-category-text h1 {
+  margin: 0;
+  font-size: 5rem;
+  color: white; 
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Add a text shadow for better readability */
+  letter-spacing: 2px; /* Add some letter spacing */
+  text-align: center;
+}
+
+.hero-category-text h2 {
+  margin: 0;
+  font-size: 3rem;
+}
