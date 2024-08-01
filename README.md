@@ -1,7 +1,7 @@
 # Scribbles
 <br>
 
-## [Click here to go to the website!]()
+## [Click here to go to the website!](https://scribbles-f4x1.onrender.com)
 <br>
 
 # Description
@@ -29,7 +29,7 @@ Scribbles is an online blog platform where users can register, post content (ref
     
  - User profile
     - Unsubscribe from Scribbles
-    - Who favorited the my Scribbles
+    - Who liked the user Scribbles
     - Get email conformation when user signs up
     
  - Scribble Page
@@ -249,6 +249,19 @@ scribble:  type: Schema.Types.ObjectId,
 
 [Aditya Raikar](https://github.com/Addiyo22)
 
+### Project
+
+[Repository Link](https://github.com/AmelieBrix/scribbles)
+
+[Deploy Link](https://scribbles-f4x1.onrender.com)
+
+### Trello
+
+[Link to trello board](https://trello.com/b/Sxe2ysXJ/scribbles)
+
+### Slides
+
+[Slides Link](www.your-slides-url-here.com)
 
 
 
