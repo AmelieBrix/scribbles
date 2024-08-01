@@ -219,6 +219,7 @@ h1 {
 .scribble-card-link{
   text-decoration: none;
   color: black;
+  margin:2rem;
 }
 
 .scribble-card h3 {
@@ -237,10 +238,15 @@ h1 {
   transition: opacity 0.3s;
 }
 
+.scribble-card-content p {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
 .scribble-card:hover .scribble-card-content {
   display: block; 
   opacity: 1;
-  margin-top: 1rem; 
+  margin-top: 3rem; 
 }
 
 .scribble-card-content img {
@@ -638,8 +644,8 @@ h1 {
   margin: 0;
   font-size: 8rem;
   color: white; 
-  text-shadow: 8px 2px 1px rgba(0, 0, 0, 0.6); /* Add a text shadow for better readability */
-  letter-spacing: 2px; /* Add some letter spacing */
+  text-shadow: 8px 2px 1px rgba(0, 0, 0, 0.6); 
+  letter-spacing: 0.2rem; /
   text-align: center;
 }
 
@@ -654,46 +660,100 @@ h1 {
   align-items: end;
 }
 
+.individual-post-page {
+  background-color: beige; /* Set the background color to beige */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  padding: 20px;
+}
+
 .individual-post-container {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 20px;
+  max-width: 65rem;
+  background-color: #00a984; 
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
 .individual-post {
-  background-color: #00a984; /* Keep the post background color */
-  border-radius: 6px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 800px;
   width: 100%;
-  padding: 20px;
-  text-align: center;
-}
-
-.post-image img {
-  width: 100%;
-  height: auto;
-  border-radius: 6px;
+  padding: 3rem;
 }
 
 .post-title {
-  margin-top: 20px;
-  font-size: 2.5rem;
+  font-weight: bold;
   color: white;
+  font-size: 3rem;
+  padding-bottom: 1rem;
+  text-align: center;
+ }
+
+.post-image img {
+  width: calc(100% + 6rem);
+  height: auto;
+  border-radius: 0.6rem;
+  margin-left: -3rem; /* Negate the left padding */
+  margin-right: -3rem; /* Negate the right padding */
+}
+
+.post-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: start;
+  margin-top: 1rem;
+}
+
+.post-header p {
+  margin: 0;
+  font-size: 2rem;
+  color: white;
+  display: flex;
+  align-items:center;
+}
+
+.post-header .icon-picture {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  margin: 0 1rem 0 1rem;
 }
 
 .post-description {
-  margin-top: 15px;
-  font-size: 1.2rem;
+  margin-top: 1.5rem;
+  font-size:2rem;
+  color: #007b63;
+  text-align: justify;
+  background-color: white;
+  padding:1.5rem;
+  border-radius: 0.6rem;
+}
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
   color: white;
-  text-align: left;
+}
+
+.like-button {
+  margin-top: 10px;
+  color: white;
 }
 
 .post-comments {
-  margin-top: 30px;
+  margin-top: 3rem;
   text-align: left;
+  max-height: 20rem; 
+  overflow-y: auto;
 }
 
 .post-comments h2 {
@@ -702,7 +762,87 @@ h1 {
 }
 
 .comment {
-  margin-top: 10px;
+  margin-top: 1rem;
   font-size: 1rem;
   color: white;
+  background-color: #007b63; /* Slightly darker background */
+  padding: 1rem;
+  border-radius: 0.6rem;
+}
+
+.comment .icon-picture {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  margin: 0 0  0.5rem 0.5rem;
+}
+
+.comment-content {
+  margin-top: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: lighter;
+  border-radius: 0.6rem;
+}
+
+.comment-form {
+  margin-top: 2rem;
+  text-align: left;
+  font-size: 1.5rem;
+}
+
+.comment-form label {
+  font-size: 1.8rem;
+  color: white;
+}
+
+.comment-form input {
+  width: 100%;
+  margin-top:0.5rem;
+  border-radius: 0.6rem;
+  padding: 1rem;
+  border: none;
+}
+
+.comment-form button {
+  margin-top: 1rem;
+  background-color: #007b63;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  border-radius: 0.6rem;
+}
+
+.comment-form button:hover {
+  background-color: #008d6b;
+}
+
+.comment-owner {
+  margin-left: 1rem;
+  font-size: 1.5rem;
+  margin-bottom: 0;
+  white-space: nowrap;
+}
+
+.btn-small {
+  padding: 1rem 1rem;
+  font-size: 1rem;
+}
+
+.delete-button-owner {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.my-scribble-h1 {
+text-align: center;
+padding: 3rem;
+font-size: 8rem;
+color: black; 
+font-weight: bold;
+letter-spacing: 0.2rem; 
+}
+
+.my-scribble-page {
+  background-color: beige;
 }
