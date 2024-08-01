@@ -154,7 +154,6 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
   
       const updatedImageUrl = req.file ? req.file.path : req.body.ImageUrl;
   
-      // Find and update the scribble
       const updatedScribble = await Scribble.findByIdAndUpdate(
         scribbleId,
         {
@@ -164,15 +163,13 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
           location,
           ImageUrl: updatedImageUrl,
         },
-        { new: true } // Option to return the updated document
+        { new: true } 
       );
   
-      // Handle case where scribble is not found
       if (!updatedScribble) {
         return res.status(404).send('Scribble not found');
       }
   
-      // Redirect to the category page
       res.redirect(`/scribbles/${updatedScribble.category.replace(/\s+/g, '-').toLowerCase()}`);
     } catch (error) {
       console.error('Error updating scribble:', error);
@@ -207,8 +204,14 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
         path: 'comments',
         populate: { path: 'user' }
       });
+      const userHasLiked = scribble.likes.includes(userId);
       const isOwner = scribble.user._id.toString() === userId.toString();
-      res.render("channels/scribble", { scribble, isOwner: isOwner, currentUserId: userId, user: req.session.currentUser});
+      res.render("channels/scribble", { 
+        scribble, isOwner: isOwner, 
+        currentUserId: userId, 
+        user: req.session.currentUser,
+        userHasLiked
+      });
     } catch (err) {
       next(err);
     }
@@ -328,6 +331,53 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
           .catch(error => next(error));
   }
 });
+
+router.get('/scribbles/:id/like', isLoggedIn, (req, res, next) => {
+  const scribbleId = req.params.id;
+  res.redirect(`/scribbles/${scribbleId}`);
+});
+
+router.post('/scribbles/:id/like',isLoggedIn, async (req, res) => {
+  try {
+    const scribbleId = req.params.id;
+    const userId = req.session.currentUser._id;
+
+    const scribble = await Scribble.findById(scribbleId);
+
+    if (!scribble) {
+      return res.status(404).json({ success: false, message: 'Scribble not found' });
+    }
+
+    if (scribble.likes.includes(userId)) {
+      // If already liked, remove the like
+      scribble.likes.pull(userId);
+    } else {
+      // Otherwise, add the like
+      scribble.likes.push(userId);
+    }
+
+    await scribble.save();
+
+    res.json({ success: true, likes: scribble.likes });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+});
+
+router.get('/user/likes', isLoggedIn, async (req, res) => {
+  try {
+    const userId = req.session.currentUser._id;
+    const likedScribbles = await Scribble.find({ likes: userId });
+
+    res.render('auth/liked-posts', { likedScribbles });
+  } catch (error) {
+    console.error(error);
+    res.status(500).render('error', { message: 'Internal server error' });
+  }
+});
+
+
 
 
   module.exports = router;

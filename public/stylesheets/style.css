@@ -468,3 +468,32 @@ h1 {
   text-align: left;
   gap: 1rem;
 }
+
+
+.heart-button {
+  display: inline-block;
+  font-size: 24px; /* Size of the heart */
+  color: gray; /* Default color for unliked state */
+  background: none; /* Remove background */
+  border: none; /* Remove border */
+  cursor: pointer; /* Show pointer cursor on hover */
+  text-align: center; /* Center content */
+  transition: color 0.3s, transform 0.3s; /* Smooth transitions */
+}
+
+/* Style for the heart icon inside the button */
+.heart-button .fa-heart {
+  color: inherit; /* Use the color from .heart-button */
+}
+
+/* Style when the button is hovered */
+.heart-button:hover {
+  color: red; /* Color when hovered */
+  transform: scale(1.1); /* Slightly enlarge the heart on hover */
+}
+
+/* Style for the liked state */
+.heart-button.liked {
+  color: red; /* Color for liked state */
+}
+
