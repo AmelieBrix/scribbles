@@ -1,5 +1,8 @@
-<h1>My Scribbles</h1>
 
+<div class="my-scribble-page">
+    <div class="my-scribble-h1">
+    <h1>My Scribbles</h1>
+</div>
     <div class="container-scribble">
         {{#each scribbles}}
         <div class="scribble-linker">
@@ -11,7 +14,9 @@
                     <div class="card-content">
                         <p class="card-title">{{this.ttitle}}</p>
                         <p class="card-description">{{this.description}}</p>
-                        <p>Likes: <span class="likes-count">{{this.likes.length}}</span></p>
+                        <p><i class="fa fa-heart heart"></i>
+                        <span class="scribbles-category-likes-count">{{this.likes.length}}</span></p>
+                        
                     </div>
                 </div>
             </a>
@@ -21,3 +26,4 @@
     <p>There are no movies yet!</p>
     {{/each}}
     </div>
+</div>
