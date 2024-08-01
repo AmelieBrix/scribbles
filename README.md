@@ -34,17 +34,20 @@ Scribbles is an online blog platform where users can register, post content (ref
     
  - Scribble Page
     - Filter part on the search
-    
+
+ - Login Page
+    - Login with username
+ 
 <br>
 
 ## API routes (back-end)
 
 - GET / 
   - renders index.hbs
-- GET /auth/signup
+- GET /signup
   - redirects to / if user logged in
-  - renders signup.hbs
-- POST /auth/signup
+  - renders auth/signup.hbs
+- POST /signup
   - redirects to / if user logged in
   - body:
     - email
@@ -52,9 +55,201 @@ Scribbles is an online blog platform where users can register, post content (ref
     - first name
     - last name
     - Profile Picture
-- POST /auth/login
+  - redirects to /login
+- GET /login
+  - redirects to / if user logged in
+  - renders auth/login.hbs
+- POST /login
   - redirects to / if user logged in
   - body:
     - email
     - password
+  - redirect to /userProfile
+- GET /userProfile
+  - redirects to /login if user logged out
+  - renders auth/profile.hbs
+- GET /userProfile/edit
+  - redirects to /login if user logged out
+  - renders auth/edit-profile
+- POST /userProfile/edit
+  - redirects to /login if user logged in
+  - body:
+    - email
+    - password
+    - first name
+    - last name
+    - Profile Picture
+  - redirect to /userProfile
+- GET /user/:userId/myscribbles
+  - renders myscribbles.hbs
+  - shows the posts the user has made
+- POST /auth/logout
+  - body: (empty)
+- GET /scribbles/category
+  - renders channels/category pages
+  - the categories are art-fart.hbs, city-vibes.hbs, food-corner.hbs, game-hub.hbs
+  - shows the posts the user has made
+- GET /scribbles/create
+  - redirects to /login if user logged in
+  - renders auth/create-post.hbs
+- POST /scribbles/create
+  - body:
+    - title
+    - category
+    - description
+    - location
+    - comments
+  - create a new post
+  - redirects to /scribbles/categoryId
+- GET /scribbles/edit/:id
+  - renders auth/edit-scribble.hbs
+- POST /scribbles/edit/:id
+  - body:
+    - title
+    - category
+    - description
+    - location
+    - ImageUrl
+  - edits a post
+  - redirects to /scribbles/updatedScribble.category
+- GET /scribbles
+  - renders scribbles.hbs
+- GET /scribbles/:id
+  - redirects to /login if user logged in
+  - renders channels/scribble.hbs
+  - displays the post
+- POST /scribbles/:id/comments
+  - redirects to /login if user logged in
+  - body:
+    - content
+  - posts a comment on a post
+  - redirects to /scribbles/scribbleId
+- GET /comments/delete/:id
+  - redirects to /login if user logged in
+  - deletes a comment on a post
+  - redirects to /scribbles/scribbleId
+- GET /scribbles/delete/:id
+  - redirects to /login if user logged in
+  - deletes a post
+  - redirects to /scribbles/scribbleId
+- GET /scribbles/:id/like
+  - redirects to /login if user logged in
+  - likes a post
+  - redirects to /scribbles/scribbleId
+- POST /scribbles/:id/like
+  - redirects to /login if user logged in
+  - likes a post
+  - redirects to /scribbles/scribbleId
+- GET /scribbles/:id/like
+  - redirects to /login if user logged in
+  - displays the users liked posts
+  - renders auth/liked-posts.hbs
+
+<br>
+
+## Models
+
+User model
+ 
+```
+first_Name: type: String,
+            trim: true,
+            required: true,
+            unique: false
+
+last_Name: type: String,
+           trim: true,
+           required: true,
+           unique: false
+
+username:  type: String,
+            trim: true,
+            required: true,
+            unique: true
+
+email:  type: String,
+        required: true,
+        unique: true,
+        lowercase: true,
+        trim: true
+
+email:  type: String,
+        required: true
+    
+email:  type: String,
+        required: false,
+        default: '../public/images/default.jpg'
+
+```
+
+Scribble model
+
+```
+title:  type: String,
+        trim: true,
+        required: true
+
+category:  type: String,
+           trim: true,
+           required: true,
+           enum: ['Art Fart', 'Food Corner', 'Game Hub', 'City Vibes']
+
+description:  type: String,
+              required: true,
+
+location:  type: String,
+           required: false
+
+time:  type: Date,
+       default: Date.now,
+       required: true  
+
+ImageUrl:  type: String,
+           required: false,
+           default: '../public/images/default_post.png'
+
+comments:  type: Schema.Types.ObjectId,
+           ref: 'Comment'
+
+user:  type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+
+likes:  type: Schema.Types.ObjectId,
+        ref: 'User' 
+
+```
+
+Comment model
+
+```
+
+user:  type: Schema.Types.ObjectId,
+       ref: 'User',
+       required: true
+
+createdAt:  type: Date,
+       default: Date.now
+
+content:  type: String,
+       required: true
+
+scribble:  type: Schema.Types.ObjectId,
+       ref: 'Scribble',
+       required: true
+
+```
+<br>
+
+## Links
+
+## Collaborators
+
+[Amelie Brix](https://github.com/AmelieBrix)
+
+[Aditya Raikar](https://github.com/Addiyo22)
+
+
+
+
 

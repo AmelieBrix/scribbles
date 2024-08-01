@@ -98,14 +98,14 @@ router.post('/scribbles/edit/:id', fileUploader.single('ImageUrl'), async (req, 
     console.error('Error updating scribble:', error);
     res.render('edit-scribble', {
       errorMessage: 'Error updating scribble. Please try again.',
-      scribble: req.body,
+      scribble: req.body
     });
   }
 });
 
 /* getting scribbles */
 
-router.get('/scribbles', isLoggedIn, async (req, res, next) => {
+router.get('/scribbles', async (req, res, next) => {
   try {
     const posts = await Scribble.find()
       .populate('user')
@@ -242,10 +242,8 @@ router.post('/scribbles/:id/like',isLoggedIn, async (req, res) => {
     }
 
     if (scribble.likes.includes(userId)) {
-      // If already liked, remove the like
       scribble.likes.pull(userId);
     } else {
-      // Otherwise, add the like
       scribble.likes.push(userId);
     }
 

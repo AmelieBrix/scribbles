@@ -33,9 +33,15 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
         });
       })
       .then(userFromDB => {
-        res.redirect('/userProfile');   
+        res.redirect('/login');   
       })
-      .catch(error => next(error));
+      .catch(error => {
+        if (error.code === 11000) {
+            res.render('auth/signup', { errorMessage: 'Email or username already exists. Please try a different one.' });
+        } else {
+            next(error);
+        }
+    });
   });
 
   router.get('/userProfile',isLoggedIn, (req, res) => {
