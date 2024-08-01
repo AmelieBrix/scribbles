@@ -13,7 +13,6 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
 
   router.post('/signup',isLoggedOut,fileUploader.single('profilePicture'), (req, res, next) => {
     const {first_Name, last_Name, username, email, password } = req.body;
-   console.log(req.body)
    if (!first_Name || !last_Name || !username || !email || !password) {
     res.render('auth/signup', { errorMessage: 'All fields are mandatory. Please provide your information.' });
     return;
@@ -34,14 +33,12 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
         });
       })
       .then(userFromDB => {
-       // res.render('auth/profile');
         res.redirect('/userProfile');   //replaced redirect with render
       })
       .catch(error => next(error));
   });
 
   router.get('/userProfile',isLoggedIn, (req, res) => {
-    console.log('req.session', req.session)
     res.render('auth/profile',{user: req.session.currentUser})
   });
 
@@ -73,8 +70,6 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
   });
 
   router.post('/login',isLoggedOut, (req, res, next) => {
-    console.log('SESSION =====> ', req.session);
-    console.log(req.body)
     const { email, password } = req.body;
     if (email === '' || password === '') {
       res.render('auth/login', {
@@ -131,12 +126,59 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
           const categoryId = newScribble.category
           await newScribble.save();
         res.redirect(`/scribbles/${categoryId.replace(/\s+/g, '-').toLowerCase()}`)
-        console.log("new scribble created", newScribble)
     } catch (error) {
       res.render('scribbles', { errorMessage: 'Error creating scribble. Please try again.' });
         console.log(error)
     }
   })
+
+  router.get('/scribbles/edit/:id', async (req, res) => {
+    try {
+      const scribbleId = req.params.id;
+      const scribble = await Scribble.findById(scribbleId);
+      if (!scribble) {
+        return res.status(404).send('Scribble not found');
+      }
+  
+      res.render('auth/edit-scribble', { scribble }); // Adjust view name as necessary
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Error retrieving scribble for editing');
+    }
+  });
+
+  router.post('/scribbles/edit/:id', fileUploader.single('ImageUrl'), async (req, res) => {
+    try {
+      const scribbleId = req.params.id;
+      const { title, category, description, location } = req.body;
+  
+      const updatedImageUrl = req.file ? req.file.path : req.body.ImageUrl;
+  
+      const updatedScribble = await Scribble.findByIdAndUpdate(
+        scribbleId,
+        {
+          title,
+          category,
+          description,
+          location,
+          ImageUrl: updatedImageUrl,
+        },
+        { new: true } 
+      );
+  
+      if (!updatedScribble) {
+        return res.status(404).send('Scribble not found');
+      }
+  
+      res.redirect(`/scribbles/${updatedScribble.category.replace(/\s+/g, '-').toLowerCase()}`);
+    } catch (error) {
+      console.error('Error updating scribble:', error);
+      res.render('edit-scribble', {
+        errorMessage: 'Error updating scribble. Please try again.',
+        scribble: req.body,
+      });
+    }
+  });
 
   router.get('/scribbles', isLoggedIn, async (req, res, next) => {
     try {
@@ -162,8 +204,14 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
         path: 'comments',
         populate: { path: 'user' }
       });
+      const userHasLiked = scribble.likes.includes(userId);
       const isOwner = scribble.user._id.toString() === userId.toString();
-      res.render("channels/scribble", { scribble, isOwner: isOwner, currentUserId: userId, user: req.session.currentUser});
+      res.render("channels/scribble", { 
+        scribble, isOwner: isOwner, 
+        currentUserId: userId, 
+        user: req.session.currentUser,
+        userHasLiked
+      });
     } catch (err) {
       next(err);
     }
@@ -226,7 +274,6 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
       const userId = req.session.currentUser._id;
       const scribble = await Scribble.findById(scribbleId);
       const categoryId = scribble.category
-      console.log("hrere--->>>",scribble)
       if (!scribble) {
         return res.status(404).send('Scribble not found');
       }
@@ -257,7 +304,7 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
         return;
     }
     const updateUser = { first_Name, last_Name, username, email };
-    const profilePicture = req.file ? req.file.path : '/images/default.jpg'; // Set default value if no file is uploaded
+    const profilePicture = req.file ? req.file.path : req.body.profilePicture;
     updateUser.profilePicture = profilePicture;
 
     if (password) {
@@ -284,6 +331,53 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
           .catch(error => next(error));
   }
 });
+
+router.get('/scribbles/:id/like', isLoggedIn, (req, res, next) => {
+  const scribbleId = req.params.id;
+  res.redirect(`/scribbles/${scribbleId}`);
+});
+
+router.post('/scribbles/:id/like',isLoggedIn, async (req, res) => {
+  try {
+    const scribbleId = req.params.id;
+    const userId = req.session.currentUser._id;
+
+    const scribble = await Scribble.findById(scribbleId);
+
+    if (!scribble) {
+      return res.status(404).json({ success: false, message: 'Scribble not found' });
+    }
+
+    if (scribble.likes.includes(userId)) {
+      // If already liked, remove the like
+      scribble.likes.pull(userId);
+    } else {
+      // Otherwise, add the like
+      scribble.likes.push(userId);
+    }
+
+    await scribble.save();
+
+    res.json({ success: true, likes: scribble.likes });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+});
+
+router.get('/user/likes', isLoggedIn, async (req, res) => {
+  try {
+    const userId = req.session.currentUser._id;
+    const likedScribbles = await Scribble.find({ likes: userId });
+
+    res.render('auth/liked-posts', { likedScribbles, user: req.session.currentUser });
+  } catch (error) {
+    console.error(error);
+    res.status(500).render('error', { message: 'Internal server error' });
+  }
+});
+
+
 
 
   module.exports = router;

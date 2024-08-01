@@ -3,8 +3,7 @@ html {
 }
 
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 1.4rem "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
@@ -16,23 +15,694 @@ h1 {
 }
 
 .profile-picture {
-  width: 150px; /* Fixed width */
-  height: 150px; /* Fixed height */
-  border-radius: 50%; /* Make the image circular */
-  object-fit: cover; /* Ensure the image covers the entire area without distortion */
-  border: 2px solid #ddd; /* Add a subtle border */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-  margin: 0 auto; /* Center the image */
-  display: block; /* Ensure the image is treated as a block element */
+  width: 15rem;
+  height: 15rem; 
+  border-radius: 50%; 
+  object-fit: cover; 
+  border: 2px solid #ddd; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  margin: 0 auto; 
+  display: block; 
 }
 
 .icon-picture {
-  width: 40px; /* Fixed width */
-  height: 40px; /* Fixed height */
-  border-radius: 30%; /* Make the image circular */
-  object-fit: cover; /* Ensure the image covers the entire area without distortion */
-  border: 2px solid #ddd; /* Add a subtle border */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-  margin: 0 auto; /* Center the image */
-  display: block; /* Ensure the image is treated as a block element */
+  width: 4rem; 
+  height: 4rem;
+  border-radius: 30%; 
+  object-fit: cover; 
+  border: 2px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  margin: 0 auto; 
+  display: block; 
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: white;
+  padding: 1rem 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 120rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.navbar-brand {
+  position: absolute;
+  left: 3rem;
+}
+
+.navbar-icon {
+  height: 20rem; 
+  vertical-align:top;
+  padding-bottom: 3.5rem;
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-grow: 1;
+  list-style: none;
+  padding: 0;
+  margin: 2rem;
+}
+
+.nav-item {
+  flex: 1;
+  text-align: center;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: black;
+  font-size: 1.8rem;
+  font-weight: bold;
+  padding: 0.5rem 1rem; 
+  display: inline-block;
+  line-height: 4rem; 
+  white-space: nowrap;
+}
+
+.nav-link:hover {
+  background-color: #00a984;
+  border-radius: 6px;
+  padding: 0 3.5rem 0 3.5rem; 
+  margin: 0.25rem; 
+}
+
+.footer {
+  background-color: white;
+  padding: 1rem 0;
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: auto; 
+  width: 100%;
+}
+
+.footer-text {
+  text-align: center;
+  color: black;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.hero {
+  width: 100%;
+  height: 70vh; 
+  overflow: hidden;
+  position: relative;
+}
+
+.hero-text {
+  position: absolute;
+  top: 50%;
+  right: 5%; 
+  transform: translateY(-50%);
+  color: black;
+  text-align: right;
+  width: 30%; 
+}
+
+.hero-text h1 {
+  margin: 0;
+  font-size: 3.5rem; 
+}
+
+.hero-text h2 {
+  margin: 0;
+  font-size: 3rem; 
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+}
+
+.cards-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 18vh; 
+}
+
+.card {
+  background-color: #00a984;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  width: 20%;
+  text-align: center;
+  text-decoration: none; 
+  color: inherit; 
+  transition: background-color 0.3s, transform 0.3s;
+  font-weight: bold;
+}
+
+.card:hover {
+  background-color: beige; 
+  transform: translateY(-5px); 
+}
+
+.card h3 {
+  margin: 0;
+  font-size: 1.6rem;
+  transition: font-weight 0.3s; 
+}
+
+.card:hover h3 {
+  font-weight: bold;
+}
+
+.scribble-cards-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start; 
+  width: 100%;
+  height: 80%;
+  padding: 2rem 0; 
+}
+
+.scribble-card {
+  background-color: #00a984;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  width: 20%;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none; 
+  color: inherit; 
+  transition: background-color 0.3s, transform 0.3s, height 0.3s;
+  height: 10rem; /* this is the initial height */
+}
+
+.scribble-card:hover {
+  background-color: #f0f0f0; 
+  transform: translateY(-5px); 
+  height: 40rem; /* and this  is the  height after you hover */
+}
+
+.scribble-card-link{
+  text-decoration: none;
+  color: black;
+}
+
+.scribble-card h3 {
+  margin: 0;
+  font-size: 1.6rem;
+  transition: font-weight 0.3s; 
+}
+
+.scribble-card:hover h3 {
+  font-weight: bold; 
+}
+
+.scribble-card-content {
+  display: none; 
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.scribble-card:hover .scribble-card-content {
+  display: block; 
+  opacity: 1;
+  margin-top: 1rem; 
+}
+
+.scribble-card-content img {
+  width: 100%;
+  height: 20rem; 
+  object-fit: cover; 
+  margin-bottom: 1rem;
+}
+
+#profile-h1{
+  background-color: beige;
+  padding-top: 2rem;
+ text-align: center;
+ margin: 0;
+}
+
+.profile-container {
+  background-color: beige;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem; 
+  text-align: center;
+}
+
+.profile-cards {
+  display: flex;
+  gap: 6rem; 
+}
+
+.profile-card {
+  background-color: #00a984;
+  border: 1px solid #ddd;
+  border-radius: 1rem;
+  padding: 4rem; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 30rem; 
+}
+
+.profile-picture {
+  width: 15rem; 
+  height: 15rem; 
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 2rem; 
+}
+
+.profile-card p {
+  margin: 2rem 0;
+  font-size: 2rem; 
+}
+
+.profile-actions {
+  margin-top: 2rem; 
+}
+
+.btn {
+  display: inline-block;
+  margin: 1rem 0; 
+  padding: 1rem 2rem;
+  background-color: #fff;
+  color: #00a984;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 1.8rem; 
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.btn:hover {
+  background-color: #008d6d;
+  color: white;
+}
+
+.edit-profile-container {
+  background-color: beige;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem;
+  text-align: center;
+}
+
+/* do we need this class? */
+.edit-profile-card {        
+  background-color: #00a984;
+  border: 1px solid #ddd;
+  border-radius: 1rem;
+  padding: 4rem; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 40rem; 
+  text-align: center;
+}
+.form-container {
+  background-color: beige;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem; 
+  text-align: center;
+}
+
+.form-card {
+  background-color: #00a984;
+  border: 1px solid #ddd;
+  border-radius: 1rem;
+  padding: 4rem; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: white;
+  width: 40rem; 
+}
+
+.form-card h2 {
+  margin-bottom: 2rem;
+  font-size: 3rem; 
+}
+
+.form-card label {
+  display: block;
+  margin-bottom: 1rem; 
+  font-size: 1.8rem; 
+  text-align: left;
+}
+
+.form-card input[type="text"],
+.form-card input[type="email"],
+.form-card input[type="password"],
+.form-card input[name="description"],
+.form-card input[type="file"] {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 2rem; /* Increase margin */
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 1.6rem; /* Increase font size */
+}
+
+.container-scribble{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  place-items: center;
+}
+
+.card-container {
+  display: flex;
+  background-color: #00a984;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  width: 50rem;
+  height: 25rem;
+  text-align: center;
+  transition: background-color 0.3s, transform 0.3s;
+  font-weight: bold;
+}
+
+.card-container:hover {
+  background-color: beige; 
+  transform: translateY(-5px); 
+}
+
+.scribble-linker{
+  text-decoration: none;
+  color: black;
+  padding-bottom: 2rem;
+}
+
+.card-image {
+  width: 20rem;
+}
+
+.card-img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+
+}
+
+.card-content {
+  width: 30rem;
+  height: 40rem;
+  padding: 2rem;
+}
+
+.card-title {
+  padding-bottom: 2rem;
+  font-size: 2rem;
+}
+.card-description{
+  display: -webkit-box; 
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+}
+
+.user-content{
+  padding-top: 5px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  text-align: left;
+  gap: 1rem;
+}
+
+
+.heart-button {
+  display: inline-block;
+  font-size: 24px; 
+  color: gray; 
+  background: none; 
+  border: none; 
+  cursor: pointer; 
+  text-align: center;
+  transition: color 0.3s, transform 0.3s; 
+}
+
+
+.heart-button .fa-heart {
+  color: inherit; 
+}
+
+
+.heart-button:hover {
+  color: red;
+  transform: scale(1.1); 
+}
+
+
+.heart-button.liked {
+  color: red; 
+}
+
+.heart {
+  margin-right: 1rem;
+  color: red; 
+}
+
+
+.scribbles-category-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1.5rem;
+    place-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    width: 100%;
+    padding-top: 20px;
+    background-color: #00a984;
+}
+
+.scribbles-category-container a {
+  text-decoration: none; /* Remove underline from all links within the card */
+}
+
+.scribbles-category-card {
+  border: 1px solid #ddd;
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 30rem;
+  flex: 1 1 30rem;
+  height: 40rem;
+  margin: 10px;
+  overflow: hidden;
+  text-decoration: none;
+  color: black;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.scribbles-category-title-container {
+  display: flex;
+  align-items: center;
+}
+
+.scribbles-category-card-image {
+  width: 100%;
+  height: 200px; 
+  overflow: hidden;
+}
+
+.scribbles-category-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+}
+
+.scribbles-category-card-content {
+  padding: 1rem;
+}
+
+.scribbles-category-card-title {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: bold;
+  text-decoration: none;
+  padding-top: 1rem;
+  text-align: center;
+}
+
+.scribbles-category-card-description {
+  margin: 10px 0;
+  font-size: 1.5rem;
+  color: grey;
+  text-decoration: none;
+  text-align: justify;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  display: -webkit-box; 
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.scribbles-category-user-content {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  text-decoration: none;
+}
+
+.scribbles-category-icon-picture {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  margin-right: 10px;
+  box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1); 
+}
+
+.scribbles-category-username {
+  margin: 0;
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: #00a984;
+  font-weight: bold;
+}
+
+.scribbles-category-likes-count {
+  font-weight: bold;
+}
+
+.scribbles-category-card:hover {
+  background-color: beige;
+  transform: translateY(-5px);
+}
+
+.scribbles-category-card:hover .scribbles-category-card-title {
+  font-weight: bold;
+}
+
+
+.hero-category {
+  width: 100%;
+  height: 50vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.hero-category-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-category-text {
+  position: absolute;
+  font-size: 6rem;
+  top: 50%;
+  right: 30%;
+  color: black;
+  text-align: center;
+  width: 30%;
+  z-index: 10; 
+}
+
+.hero-category-text h1 {
+  margin: 0;
+  font-size: 8rem;
+  color: white; 
+  text-shadow: 8px 2px 1px rgba(0, 0, 0, 0.6); /* Add a text shadow for better readability */
+  letter-spacing: 2px; /* Add some letter spacing */
+  text-align: center;
+}
+
+.hero-category-text h2 {
+  margin: 0;
+  font-size: 3rem;
+}
+
+.scribbles-category-likes-container {
+  margin-top: auto;
+  display: flex;
+  align-items: end;
+}
+
+.individual-post-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+}
+
+.individual-post {
+  background-color: #00a984; /* Keep the post background color */
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+}
+
+.post-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+.post-title {
+  margin-top: 20px;
+  font-size: 2.5rem;
+  color: white;
+}
+
+.post-description {
+  margin-top: 15px;
+  font-size: 1.2rem;
+  color: white;
+  text-align: left;
+}
+
+.post-comments {
+  margin-top: 30px;
+  text-align: left;
+}
+
+.post-comments h2 {
+  font-size: 1.8rem;
+  color: white;
+}
+
+.comment {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: white;
 }

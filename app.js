@@ -46,4 +46,9 @@ hbs.registerHelper('ifEqual', function(v1, v2, options) {
     return options.inverse(this);
   });
 
+  // register eq handlebar helper
+  hbs.registerHelper('eq', function(a, b) {
+    return a === b;
+  });
+
 module.exports = app;

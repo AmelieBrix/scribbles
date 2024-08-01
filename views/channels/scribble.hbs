@@ -1,13 +1,12 @@
-<h1>here is your fickigmn scribble</h1>
 
-<div class="row">
-
-    <div class="col-md-4 mb-5">
-      <div class="card" style="width: 18rem;">
-        <img src="{{scribble.ImageUrl}}" class="card-img-top" alt="{{scribble.title}}">
-        <div class="card-body">
-          <h5 class="card-title">{{scribble.title}}</h5> <p>Posted by {{scribble.user.username}}</p>
-          <p class="card-text">{{scribble.description}}</p>
+<div>
+    <div>
+      <div>
+        <img src="{{scribble.ImageUrl}}" alt="{{scribble.title}}">
+        <div>
+          <h5>{{scribble.title}}</h5> <p>Posted by {{scribble.user.username}}</p> <img src="{{user.profilePicture}}" alt="Profile Picture" class="icon-picture">
+          <p>{{scribble.description}}</p>
+          <a href="#" class="like-button heart-button {{#if userHasLiked}}liked{{/if}}" data-id="{{scribble._id}}"><i class="fa fa-heart heart"></i></a>
           {{#each scribble.comments}}
             <p>{{this.content}} - <img src="{{user.profilePicture}}" alt="Profile Picture" class="icon-picture"> {{this.user.username}}</p>
             {{#ifEqual this.user.id ../currentUserId}}
@@ -20,10 +19,11 @@
           </label>
           <button type="submit">submit</button>
           </form>
-
          {{#if isOwner}}
           <a href="/scribbles/delete/{{scribble._id}}" onclick="return confirm('Are you sure you want to delete this scribble?');" class="btn btn-danger">Delete</a>
          {{/if}}
         </div>
       </div>
     </div>
+
+ 
