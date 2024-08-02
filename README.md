@@ -261,7 +261,7 @@ scribble:  type: Schema.Types.ObjectId,
 
 ### Slides
 
-[Slides Link](www.your-slides-url-here.com)
+[Slides Link](https://docs.google.com/presentation/d/1LIc0dthcYR9n2AuwccZGjvmR1nOT9Qes7sVHGWfIUYE/edit?usp=sharing)
 
 
 
