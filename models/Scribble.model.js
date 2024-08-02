@@ -42,7 +42,10 @@ const scribbleSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'User', // This references the User model
       required: true
-    }
+    },
+    likes: [{ 
+      type: Schema.Types.ObjectId,
+      ref: 'User' }]
   },
   {
     timestamps : true

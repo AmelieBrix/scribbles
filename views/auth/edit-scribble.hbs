@@ -1,0 +1,38 @@
+<h1 id="profile-h1">Edit Scribble</h1>
+<div class="form-container">
+  <div class="form-card">
+<form action="/scribbles/edit/{{scribble._id}}" method="post" enctype="multipart/form-data">
+
+    <label for="title">Title:
+    <input type="text" name="title" value="{{scribble.title}}">
+    </label>
+
+    <label for="category">Choose a Category:
+    <select name="category" value="{{scribble.category}}">
+         <option value="Art Fart" {{#if (eq scribble.category 'Art Fart')}}selected{{/if}}>Art Fart</option>
+          <option value="City Vibes" {{#if (eq scribble.category 'City Vibes')}}selected{{/if}}>City Vibes</option>
+          <option value="Food Corner" {{#if (eq scribble.category 'Food Corner')}}selected{{/if}}>Food Corner</option>
+          <option value="Game Hub" {{#if (eq scribble.category 'Game Hub')}}selected{{/if}}>Game Hub</option>
+    </select>
+    </label>
+
+    <label for="description">Description:
+    <input type="text" name="description" value="{{scribble.description}}">
+    </label>
+
+    <label for="location">Location:
+    <input type="text" name="location" value="{{scribble.location}}">
+    </label>
+
+    <div class="profile-picture-container">
+        <img src="{{scribble.ImageUrl}}" alt="Scribble Image" class="profile-picture">
+    </div>
+
+    <label for="ImageUrl">Add a picture:
+      <input type="file" name="ImageUrl" />
+    </label>
+
+    <button type="submit" class="btn">Submit</button>
+</form>
+</div>
+</div>

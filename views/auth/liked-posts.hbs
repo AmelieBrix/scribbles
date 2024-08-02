@@ -1,0 +1,27 @@
+<div class="my-scribble-page">
+    <div class="my-scribble-h1">
+    <h1>Liked Scribbles</h1>
+ </div>
+
+    <div class="container-scribble">
+        {{#each likedScribbles}}
+        <div class="scribble-linker">
+            <a href="/scribbles/{{this._id}}" class="scribble-linker">
+                <div class="card-container">
+                    <div class="card-image">
+                        <img src="{{this.ImageUrl}}" class="card-img" alt="{{this.title}}">
+                    </div>
+                    <div class="card-content">
+                        <p class="card-title">{{this.ttitle}}</p>
+                        <p class="card-description">{{this.description}}</p>
+                        <p><i class="fa fa-heart heart"></i>
+                        <span class="scribbles-category-likes-count">{{this.likes.length}}</span></p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {{else}}
+    <p>There are no movies yet!</p>
+    {{/each}}
+    </div>
+ </div>

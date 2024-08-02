@@ -1,20 +1,30 @@
-<h1>update your profile</h1>
+  <div class="edit-profile-container">
+    <h1>Update your profile</h1>
+    <div class="form-card">
 
-<form action="/userProfile/edit" method="post">
-    <label for="first_Name">First Name:</label>
-    <input type="text" name="first_Name" value="{{user.first_Name}}">
-
-    <label for="last_Name">Last Name:</label>
-    <input type="text" name="last_Name" value="{{user.last_Name}}">
-
-    <label for="username">Username:</label>
-    <input type="text" name="username" value="{{user.username}}">
-
-    <label for="email">Email:</label>
-    <input type="text" name="email" value="{{user.email}}">
-
-    <label for="password">New Password (optional):</label>
-    <input type="text" name="password">
-
-    <button type="submit">Submit</button>
-</form>
+        <label for="profilePicture"></label>
+        <div class="profile-picture-container">
+          <img src="{{user.profilePicture}}" alt="Profile Picture" class="profile-picture">
+        </div>
+        <form action="/userProfile/edit" method="post" enctype="multipart/form-data">
+        <input type="file" name="profilePicture" >
+<br>
+        <label for="first_Name">First Name:</label>
+        <input type="text" name="first_Name" value="{{user.first_Name}}">
+<br>
+        <label for="last_Name">Last Name:</label>
+        <input type="text" name="last_Name" value="{{user.last_Name}}">
+<br>
+        <label for="username">Username:</label>
+        <input type="text" name="username" value="{{user.username}}">
+<br>
+        <label for="email">Email:</label>
+        <input type="text" name="email" value="{{user.email}}">
+<br>
+        <label for="password">New Password (optional):</label>
+        <input type="password" name="password">
+<br>
+        <button type="submit" class="btn">Submit</button>
+      </form>
+    </div>
+  </div>

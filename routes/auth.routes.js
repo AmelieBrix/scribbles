@@ -13,7 +13,6 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
 
   router.post('/signup',isLoggedOut,fileUploader.single('profilePicture'), (req, res, next) => {
     const {first_Name, last_Name, username, email, password } = req.body;
-   console.log(req.body)
    if (!first_Name || !last_Name || !username || !email || !password) {
     res.render('auth/signup', { errorMessage: 'All fields are mandatory. Please provide your information.' });
     return;
@@ -22,24 +21,55 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
       .genSalt(saltRounds)
       .then(salt => bcryptjs.hash(password, salt))
       .then(hashedPassword => {
+        const profilePicture = req.file ? req.file.path : '/images/default.jpg'; // Set default value if no file is uploaded
+
         return User.create({
           first_Name,
           last_Name,
           username,
           email,
           passwordHash: hashedPassword,
-          profilePicture: req.file.path
+          profilePicture: profilePicture
         });
       })
       .then(userFromDB => {
-        res.render('auth/profile');   //replaced redirect with render
+        res.redirect('/login');   
       })
-      .catch(error => next(error));
+      .catch(error => {
+        if (error.code === 11000) {
+            res.render('auth/signup', { errorMessage: 'Email or username already exists. Please try a different one.' });
+        } else {
+            next(error);
+        }
+    });
   });
 
   router.get('/userProfile',isLoggedIn, (req, res) => {
-    console.log('req.session', req.session)
     res.render('auth/profile',{user: req.session.currentUser})
+  });
+
+  router.get('/user/:userId/myscribbles', async (req, res) => {
+    try {
+      const userId = req.params.userId;
+      const user = await User.findById(userId);
+  
+      if (!user) {
+        return res.status(404).send('User not found');
+      }
+  
+      const scribbles = await Scribble.find({ user: userId })
+      .populate('user')
+      .populate('comments.user')
+      .exec();
+      res.render('myscribbles', { 
+        scribbles,
+        currentUserId: req.session.currentUser._id, 
+        user: req.session.currentUser 
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal server error');
+    }
   });
 
   router.get('/login',isLoggedOut, (req, res, next) => {
@@ -47,8 +77,6 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
   });
 
   router.post('/login',isLoggedOut, (req, res, next) => {
-    console.log('SESSION =====> ', req.session);
-    console.log(req.body)
     const { email, password } = req.body;
     if (email === '' || password === '') {
       res.render('auth/login', {
@@ -81,86 +109,14 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
     });
   });
 
-  router.get('/scribbles/create', isLoggedIn, (req, res) => {
-    res.render('auth/create-post')
-  })
-
-  router.post('/scribbles/create',fileUploader.single('ImageUrl'), async (req, res) => {
-    try {
-        const { title, category, description, location, comments } = req.body
-        const userId = req.session.currentUser._id;
-        const user = await User.findById(userId);
-          if (!user) {
-            return res.status(404).send('User not found');
-          }
-          const newScribble = new Scribble({
-            title,
-            category,
-            description,
-            location,
-            user: user._id,
-            ImageUrl : req.file.path
-          });
-          await newScribble.save();
-        res.redirect('/scribbles')
-        console.log("new scribble created", newScribble)
-    } catch (error) {
-      res.render('scribbles', { errorMessage: 'Error creating scribble. Please try again.' });
-        console.log(error)
-    }
-  })
-
-  router.get('/scribbles', isLoggedIn, async (req, res, next) => {
-    try {
-      const posts = await Scribble.find()
-        .populate('user')
-        .populate({
-          path: 'comments',
-          populate: { path: 'user' }
-        });
-      res.render("scribbles", { posts });
-    } catch (err) {
-      next(err);
-    }
-  });
-
-  router.post('/scribbles/:id/comments', isLoggedIn, async (req, res) => {
-    try {
-      const { content } = req.body;
-      const scribbleId = req.params.id;
-      const userId = req.session.currentUser._id;
-  
-      const newComment = new Comment({
-        content,
-        user: userId
-      });
-  
-      await newComment.save();
-  
-      const scribble = await Scribble.findById(scribbleId);
-      if (!scribble) {
-        return res.status(404).send('Scribble not found');
-      }
-  
-      scribble.comments.push(newComment._id);
-      await scribble.save();
-  
-      res.redirect(`/scribbles/${scribbleId}`);
-    } catch (error) {
-      res.render('scribbles', { errorMessage: 'Error adding comment. Please try again.' });
-      console.log(error);
-    }
-  });
-
   router.get('/userProfile/edit', isLoggedIn, (req, res, next) => {
     res.render('auth/edit-profile', { user: req.session.currentUser });
   });
 
-  router.post('/userProfile/edit', isLoggedIn, (req, res, next) => {
-    const { first_Name, last_Name, username, email, password } = req.body;
+  router.post('/userProfile/edit', isLoggedIn, fileUploader.single('profilePicture'), (req, res, next) => {
+    const { first_Name, last_Name, username, email, password} = req.body;
     const userId = req.session.currentUser._id;
-    console.log(req.body, "lala")
-    if (!first_Name || !last_Name || !username || !email) {
+    if (!first_Name || !last_Name || !username || !email ) {
         res.render('auth/edit-profile', { 
             errorMessage: 'All fields are mandatory. Please provide your information.', 
             user: req.session.currentUser 
@@ -168,6 +124,8 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
         return;
     }
     const updateUser = { first_Name, last_Name, username, email };
+    const profilePicture = req.file ? req.file.path : req.body.profilePicture;
+    updateUser.profilePicture = profilePicture;
 
     if (password) {
       bcryptjs
@@ -178,21 +136,20 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
               return User.findByIdAndUpdate(userId, updateUser, { new: true });
           })
           .then(updatedUser => {
-              console.log(req.session.currentUser,"here")
-              req.session.currentUser = updatedUser; // Update session with new user info
+              req.session.currentUser = updatedUser; 
               res.render('auth/profile', { user: updatedUser });
           })
           .catch(error => next(error));
   } else {
       User.findByIdAndUpdate(userId, updateUser, { new: true })
           .then(updatedUser => {
-            console.log(req.session.currentUser,"here")
-              req.session.currentUser = updatedUser; // Update session with new user info
+              req.session.currentUser = updatedUser; 
               res.render('auth/profile', { user: updatedUser });
           })
           .catch(error => next(error));
   }
 });
 
-
   module.exports = router;
+
+
