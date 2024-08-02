@@ -20,7 +20,12 @@
                     </div>
                 </div>
             </a>
-            <a href="/scribbles/edit/{{this._id}}" onclick="return confirm('Are you sure you want to edit this scribble?');" class="btn btn-danger">Edit Scribble</a>
+            <div class="my-Scribbles-links">
+                <div><a href="/scribbles/edit/{{this._id}}" onclick="return confirm('Are you sure you want to edit this scribble?');" class="btn btn-danger">Edit Scribble</a></div>
+                <div><a href="/scribbles/delete/{{scribble._id}}" onclick="return confirm('Are you sure you want to delete this scribble?');" class="btn btn-danger delete-button-owner myscribble-link-btn">Delete</a></div>
+            </div>
+
+            
         </div>
         {{else}}
     <p>There are no movies yet!</p>

@@ -57,8 +57,10 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
         return res.status(404).send('User not found');
       }
   
-      const scribbles = await Scribble.find({ user: userId }).populate('user').populate('comments.user').exec();
-      
+      const scribbles = await Scribble.find({ user: userId })
+      .populate('user')
+      .populate('comments.user')
+      .exec();
       res.render('myscribbles', { 
         scribbles,
         currentUserId: req.session.currentUser._id, 

@@ -113,7 +113,7 @@ router.get('/scribbles', async (req, res, next) => {
         path: 'comments',
         populate: { path: 'user' }
       });
-    res.render("scribbles", { posts });
+    res.render("scribbles", { posts, user: req.session.currentUser});
   } catch (err) {
     next(err);
   }

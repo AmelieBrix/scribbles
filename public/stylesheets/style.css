@@ -388,7 +388,6 @@ h1 {
 .form-card input[type="text"],
 .form-card input[type="email"],
 .form-card input[type="password"],
-.form-card input[name="description"],
 .form-card input[type="file"] {
   width: 100%;
   padding: 1rem;
@@ -396,6 +395,17 @@ h1 {
   border-radius: 5px;
   border: 1px solid #ddd;
   font-size: 1.6rem; /* Increase font size */
+}
+
+.form-card textarea[name="description"]{
+  height: 20rem;
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 2rem; /* Increase margin */
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 1.6rem; /* Increase font size */
+  resize: vertical;
 }
 
 .container-scribble{
@@ -645,7 +655,7 @@ h1 {
   font-size: 8rem;
   color: white; 
   text-shadow: 8px 2px 1px rgba(0, 0, 0, 0.6); 
-  letter-spacing: 0.2rem; /
+  letter-spacing: 0.2rem; 
   text-align: center;
 }
 
@@ -845,4 +855,15 @@ letter-spacing: 0.2rem;
 
 .my-scribble-page {
   background-color: beige;
+}
+
+.my-Scribbles-links{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.myscribble-link-btn{
+  margin-top: 10px;
 }
