@@ -1,7 +1,7 @@
 # Scribbles
 <br>
 
-## [Click here to go to the website!](https://scribbles-f4x1.onrender.com)
+## [Click here to go to the website!](https://scribbles-final.onrender.com/)
 <br>
 
 # Description
@@ -253,7 +253,7 @@ scribble:  type: Schema.Types.ObjectId,
 
 [Repository Link](https://github.com/AmelieBrix/scribbles)
 
-[Deploy Link](https://scribbles-f4x1.onrender.com)
+[Deploy Link](https://scribbles-final.onrender.com/)
 
 ### Trello
 
