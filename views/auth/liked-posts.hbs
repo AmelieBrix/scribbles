@@ -1,27 +1,31 @@
+
 <div class="my-scribble-page">
     <div class="my-scribble-h1">
     <h1>Liked Scribbles</h1>
- </div>
+</div>
 
-    <div class="container-scribble">
-        {{#each likedScribbles}}
-        <div class="scribble-linker">
-            <a href="/scribbles/{{this._id}}" class="scribble-linker">
-                <div class="card-container">
-                    <div class="card-image">
-                        <img src="{{this.ImageUrl}}" class="card-img" alt="{{this.title}}">
-                    </div>
-                    <div class="card-content">
-                        <p class="card-title">{{this.ttitle}}</p>
-                        <p class="card-description">{{this.description}}</p>
-                        <p><i class="fa fa-heart heart"></i>
-                        <span class="scribbles-category-likes-count">{{this.likes.length}}</span></p>
-                    </div>
-                </div>
-            </a>
+    <div class="scribbles-category-container">
+  {{#each likedScribbles}}
+  <div class="scribbles-category-linker">
+    <a href="/scribbles/{{this._id}}" class="scribbles-category-linker">
+      <div class="scribbles-category-card">
+        <div class="scribbles-category-card-image">
+          <img src="{{ImageUrl}}" class="scribbles-category-card-img" alt="{{title}}">
         </div>
-        {{else}}
-    <p>There are no movies yet!</p>
-    {{/each}}
-    </div>
- </div>
+        <div class="scribbles-category-card-content">
+          <p class="scribbles-category-card-title">{{title}}</p>
+          <p class="scribbles-category-card-description">{{description}}</p>
+           <div class="scribbles-category-likes-container">
+            <i class="fa fa-heart heart"></i>
+            <span class="scribbles-category-likes-count">{{this.likes.length}}</span>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+  
+  {{else}}
+  <p>There are no posts yet!</p>
+  {{/each}}
+</div>
+</div>

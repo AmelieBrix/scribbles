@@ -262,7 +262,6 @@ router.get('/user/likes', isLoggedIn, async (req, res) => {
   try {
     const userId = req.session.currentUser._id;
     const likedScribbles = await Scribble.find({ likes: userId });
-
     res.render('auth/liked-posts', { likedScribbles, user: req.session.currentUser });
   } catch (error) {
     console.error(error);
