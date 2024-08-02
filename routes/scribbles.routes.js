@@ -165,10 +165,8 @@ router.post('/scribbles/:id/comments', isLoggedIn, async (req, res) => {
     if (!scribble) {
       return res.status(404).send('Scribble not found');
     }
-
     scribble.comments.push(newComment._id);
     await scribble.save();
-
     res.redirect(`/scribbles/${scribbleId}`);
   } catch (error) {
     res.render('scribbles', { errorMessage: 'Error adding comment. Please try again.' });
@@ -234,21 +232,16 @@ router.post('/scribbles/:id/like',isLoggedIn, async (req, res) => {
   try {
     const scribbleId = req.params.id;
     const userId = req.session.currentUser._id;
-
     const scribble = await Scribble.findById(scribbleId);
-
     if (!scribble) {
       return res.status(404).json({ success: false, message: 'Scribble not found' });
     }
-
     if (scribble.likes.includes(userId)) {
       scribble.likes.pull(userId);
     } else {
       scribble.likes.push(userId);
     }
-
     await scribble.save();
-
     res.json({ success: true, likes: scribble.likes });
   } catch (error) {
     console.error(error);
